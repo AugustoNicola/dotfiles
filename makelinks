@@ -1,0 +1,27 @@
+# BASH
+echo "================ Linking bash ================"
+[ -f "$HOME/.bashrc" ] && rm "$HOME/.bashrc"
+[ -f "$HOME/.bash_aliases" ] && rm "$HOME/.bash_aliases"
+stow -t "$HOME" bash/
+
+# GIT
+echo "================ Linking git ================"
+[ -f "$HOME/.gitconfig" ] && rm "$HOME/.gitconfig"
+stow -t "$HOME" git/
+
+# COMPTON
+echo "================ Linking compton ================"
+[ -d "$HOME/.config/compton" ] && rm -rf "$HOME/.config/compton"
+stow -t "$HOME/.config" compton/
+
+# NEOFETCH
+echo "================ Linking neofetch ================"
+[ -d "$HOME/.config/neofetch" ] && rm -rf "$HOME/.config/neofetch"
+stow -t "$HOME/.config" neofetch/
+
+# QTILE
+echo "================ Linking Qtile ================"
+[ -d "$HOME/.config/qtile" ] && rm -rf "$HOME/.config/qtile"
+stow -t "$HOME/.config" qtile/
+
+echo "================== LINKS MADE ==================="

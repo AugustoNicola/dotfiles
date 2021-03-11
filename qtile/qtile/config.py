@@ -56,6 +56,7 @@ alt = "mod1"
 terminal = "gnome-terminal"
 web_browser = "firefox"
 file_explorer = "xdg-open ."
+github = "github-desktop"
 music_player = "spotify"
 spotify_cli = "bash /home/lambda/.config/qtile/sp.sh"
 ide = "code -n"
@@ -128,6 +129,8 @@ keys = [
         desc="Launch default web browser"),
     Key([mod], "f", lazy.spawn(file_explorer),
         desc="Launch default file explorer"),
+    Key([mod], "g", lazy.spawn(github),
+        desc="Launch GitHub"),
     Key([mod], "m", lazy.spawn(music_player),
         desc="Launch default music player"),
     Key([mod], "c", lazy.spawn(ide),

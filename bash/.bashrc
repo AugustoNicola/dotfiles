@@ -1,7 +1,3 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
-
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -9,12 +5,9 @@ case $- in
 esac
 
 # don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
 HISTCONTROL=ignoreboth
-
 # append to the history file, don't overwrite it
 shopt -s histappend
-
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=1000
 HISTFILESIZE=2000
@@ -22,10 +15,9 @@ HISTFILESIZE=2000
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
-
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
-#shopt -s globstar
+shopt -s globstar
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -56,7 +48,8 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-#* Configura el prompt de la terminal, los colores se aplican utilizando codigos ANSI (\e = \033)
+#* Configures prompt colors, applied using ANSI characters (e.g. \e = \033)
+#? evauates to: user@directory $ (e.g. lambda@~ $)
 if [ "$color_prompt" = yes ]; then
     PS1='${debian_chroot:+($debian_chroot)}\[\e[01;35m\]\u\[\e[00m\]@\[\e[01;36m\]\w\[\e[00m\] \[\e[01;35m\]\$\[\e[00m\]'
 else
@@ -74,7 +67,7 @@ xterm*|rxvt*)
 esac
 
 
-# Alias definitions.
+#* Use alias definitions.
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
@@ -83,12 +76,12 @@ fi
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
 if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
+if [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
   elif [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
   fi
 fi
 
-# ======== RUN COMMANDS AT CONSULE STARTUP ========
+#* ======== RUN COMMANDS AT SHELL STARTUP ========
 neofetch

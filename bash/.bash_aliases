@@ -10,17 +10,13 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-# ls aliases
+# ls alias: show full info as a list in a human-readable manner
 alias ll='ls -AlFh'
 
-# ===== CUSTOM =====
-
-# clear
+# clear shortcuts
 alias cls='clear'
-
-# clear and neofetch
 alias neocls='clear; neofetch'
 alias ncls='clear; neofetch'
 
-# matrix
+# matrix "toy command"
 alias matrix='cmatrix -B -C magenta'

@@ -5,6 +5,7 @@
 # Copyright (c) 2012 Craig Barnes
 # Copyright (c) 2013 horsik
 # Copyright (c) 2013 Tao Sauvage
+# Copyright (c) 2021 Augusto Nicola
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -35,6 +36,7 @@ from libqtile.lazy import lazy
 from libqtile.command import lazy as lazy_cmd
 from libqtile.utils import guess_terminal
 
+#* colors used throughout the layout
 palette_colors = {
     "primary": [
         '#8A3B99',
@@ -42,7 +44,7 @@ palette_colors = {
         '#A661B3',
         '#B58BBD',
         '#C59FCB',
-        '#9130A5' #groups : [5]
+        '#9130A5'
     ],
     "secondary": [
         '#74D092'
@@ -50,15 +52,17 @@ palette_colors = {
     "background": "#252525"
 }
 
+#? special keys
 mod = "mod4"
 alt = "mod1"
 
+#? programs used
 terminal = "gnome-terminal"
 web_browser = "firefox"
 file_explorer = "xdg-open ."
 github = "github-desktop"
 music_player = "spotify"
-spotify_cli = "bash /home/lambda/.config/qtile/sp.sh"
+spotify_cli = "bash ~/.config/qtile/spotify.sh"
 ide = "code -n"
 text_editor = "subl -n"
 discord = "discord"
@@ -69,7 +73,7 @@ screenshot_and_edit = "scrot '%F_%H:%M.png' -zp -e 'mv $f ~/Pictures/Screenshots
 # ===========================    KEYBINDINGS     =============================
 # ============================================================================
 keys = [
-    # ========== Desplazarse entre ventanas ==========
+    # ========== Move focus between windows ==========
     Key([mod], "Left", lazy.layout.left(),
         desc="Move focus to left"),
     Key([mod], "Right", lazy.layout.right(),
@@ -81,7 +85,7 @@ keys = [
     Key([alt], "Tab", lazy.layout.next(),
         desc="Move window focus to next window"),
 
-    # ========== Mover ventanas en un mismo grupo ==========
+    # ========== Move windows in a group ==========
     Key([mod, "shift"], "Left", lazy.layout.shuffle_left(),
         desc="Move window to the left"),
     Key([mod, "shift"], "Right", lazy.layout.shuffle_right(),
@@ -91,7 +95,7 @@ keys = [
     Key([mod, "shift"], "Up", lazy.layout.shuffle_up(),
         desc="Move window up"),
 
-    # ========== Modificar el tamaño de ventanas ==========
+    # ========== Grow/shrink windows ==========
     Key([mod, "control"], "Left", lazy.layout.grow_left(),
         desc="Grow window to the left"),
     Key([mod, "control"], "Right", lazy.layout.grow_right(),
@@ -103,17 +107,17 @@ keys = [
     Key([mod], "n", lazy.layout.normalize(),
         desc="Reset all window sizes"),
     
-    # ========== Interactuar con ventanas ==========
+    # ========== Window interactions ==========
     Key([mod], "w", lazy.window.kill(),
         desc="Kill focused window"),
 
-    # ========== Desplazarse entre grupos ==========
+    # ========== Move between groups ==========
     Key([mod], "Tab", lazy.screen.next_group(),
         desc="Go to next group"),
      Key([mod, "shift"], "Tab", lazy.screen.prev_group(),
         desc="Go to next group"),
 
-    # ========== Alternar entre layout modes ==========
+    # ========== Move between layouts ==========
     Key([mod], "space", lazy.next_layout(),
         desc="Toggle between layouts"),
 
@@ -144,7 +148,7 @@ keys = [
     Key([mod], "Print", lazy.spawn(screenshot_and_edit),
         desc="Take a screenshot of the current view, mouse included, and then open it in GIMP"),
 
-    # ========== Controles de Spotify ==========
+    # ========== Spotify controls ==========
     Key([alt], "F7", lazy.spawn(spotify_cli + " play"),
         desc="Play/pause spotify"),
     Key([alt], "F6", lazy.spawn(spotify_cli + " prev"),
@@ -152,7 +156,7 @@ keys = [
     Key([alt], "F8", lazy.spawn(spotify_cli + " next"),
         desc="Foward spotify"),
 
-    # ========== Alimentacion de Qtile ==========
+    # ========== Qtile interactions ==========
     Key([mod, "control"], "r", lazy.restart(),
         desc="Restart Qtile"),
     Key([mod, "control"], "q", lazy.shutdown(),
@@ -164,6 +168,8 @@ keys = [
 # ============================================================================
 if __name__ in ["config", "__main__"]:
 
+	#? the strings used in the label attribute are unicode glyphs from the FontAwesome 5 font as well as the FiraCode Nerd Font
+	#! the fonts are required for the icons to load 
     group_props = [
     #   ("name", {"arg": "val"}),
         ("HOME", {'label':'ﬦ'}),
@@ -178,11 +184,11 @@ if __name__ in ["config", "__main__"]:
 
     for i, (name, kwargs) in enumerate(group_props, 1):
         keys.extend([
-            # Cambiar a grupo
+            # Switch to group
             Key([mod], str(i), lazy.group[name].toscreen(),
                 desc="Switch to group {}".format(name)),
 
-            # Mover ventana a grupo
+            # Move window to group
             Key([mod, "shift"], str(i), lazy.window.togroup(name, switch_group=True),
                 desc="Switch to & move focused window to group {}".format(name)),
         ])
@@ -230,9 +236,9 @@ floating_layout = layout.Floating(float_rules=[
 # Drag floating layouts.
 mouse = [
     Drag([mod], "Button1", lazy.window.set_position_floating(),
-         start=lazy.window.get_position()),
+		start=lazy.window.get_position()),
     Drag([mod], "Button3", lazy.window.set_size_floating(),
-         start=lazy.window.get_size()),
+		start=lazy.window.get_size()),
     Click([mod], "Button2", lazy.window.bring_to_front())
 ]
 
@@ -241,13 +247,13 @@ mouse = [
 # ============================================================================
 def open_wifi_settings():
     qtile.cmd_spawn('nm-connection-editor')
-    if qtile.current_group.name != "CFG":
-        qtile.groups_map["CFG"].cmd_toscreen() #ver libqtile/core/manager.py -> metodo cmd_togroup()
+    if qtile.current_group.name != "CFG": #* if we are already on the group, calling the method would revert to the last used group
+        qtile.groups_map["CFG"].cmd_toscreen() #? see libqtile/core/manager.py -> method cmd_togroup()
 
 def open_audio_settings():
     qtile.cmd_spawn('pavucontrol')
     if qtile.current_group.name != "CFG":
-        qtile.groups_map["CFG"].cmd_toscreen() #ver libqtile/core/manager.py -> metodo cmd_togroup()
+        qtile.groups_map["CFG"].cmd_toscreen()
 
 
 # ============================================================================
@@ -281,10 +287,10 @@ screens = [
     Screen(
         bottom=bar.Bar(
             [
-                # Barra de Grupos
+                # Group Bar(s)
                 widget.GroupBox(
                     visible_groups = ["HOME"],
-                    font = "FiraCode Nerd Font",
+                    font = "FiraCode Nerd Font", #? using the font is vital for loading the icon
                     fontsize = 26,
                     **groupbox_defaults
                 ),
@@ -312,40 +318,40 @@ screens = [
                     fontsize = 18,
                     **groupbox_defaults
                 ),
-                # Prompt para correr comandos
+                # Command-running prompt
                 widget.Prompt(
                     background = palette_colors["background"],
                     prompt = 'Run: ',
                     name = 'prompt'
                 ),
-                # Espacio Dinamico
+                # Dynamic spacing
                 widget.Spacer(background = palette_colors["background"]),
-                # Nombre de Ventana
+                # Window name
                 widget.WindowName(
                     background = palette_colors["background"],
                     width = bar.CALCULATED,
                     max_chars = 100,
                     foreground = palette_colors["secondary"][0]
                 ),
-                # Espacio Dinamico
+                # Dynamic spacing
                 widget.Spacer(background = palette_colors["background"]),
-                # Flecha
+                # Powerline Arrow
                 widget.TextBox(font='Font Awesome 5 Free', text='', padding=0, fontsize=64,
                     background = palette_colors["background"],
                     foreground = palette_colors["primary"][3]
                 ),
-                # Barra de Programas
+                # Systray
                 widget.Systray(
                     background = palette_colors["primary"][3],
                 ),
-                # Espaciado
+                # Spacing
                 widget.Sep(linewidth = 0, padding = 5, background=palette_colors["primary"][3]),
-                # Flecha
+                # Powerline Arrow
                 widget.TextBox(font='Font Awesome 5 Free', text='', padding=0, fontsize=64,
                     background = palette_colors["primary"][3],
                     foreground = palette_colors["primary"][2]
                 ),
-                # Icono de internet
+                # Internet Icon
                 widget.TextBox(
                     font = 'Font Awesome 5 Free',
                     text = '',
@@ -353,7 +359,7 @@ screens = [
                     background = palette_colors["primary"][2],
                     mouse_callbacks = {'Button1': open_wifi_settings}
                 ),
-                # Espaciado entre iconos
+                # Spacing between Icons
                 widget.Sep(linewidth = 0, padding = 5, background = palette_colors["primary"][2]),
                 # Icono de audio
                 widget.TextBox(
@@ -363,54 +369,54 @@ screens = [
                     background = palette_colors["primary"][2],
                     mouse_callbacks = {'Button1': open_audio_settings}
                 ),
-                # Espaciado
+                # Spacing
                 widget.Sep(linewidth = 0, padding = 5, background=palette_colors["primary"][2]),
-                # Flecha
+                # Powerline Arrow
                 widget.TextBox(font='Font Awesome 5 Free', text='', padding=0, fontsize=64,
                     background=palette_colors["primary"][2],
                     foreground=palette_colors["primary"][1]
                 ),
-                # Icono de calendario
+                # Calendar Icon 
                 widget.TextBox(
                     font = 'Font Awesome 5 Free',
                     text = '',
                     fontsize = 14,
                     background = palette_colors["primary"][1]
                 ),
-                # Espaciado
+                # Spacing
                 widget.Sep(linewidth = 0, padding = 3, background=palette_colors["primary"][1]),
-                # Widget Fecha
+                # Date Widget
                 widget.Clock(
-                    format='%Y/%m/%d %a',
+                    format='%Y/%m/%d %a', #! embrace ISO 8601
                     background=palette_colors["primary"][1],
                 ),
-                # Espaciado
+                # Spacing
                 widget.Sep(linewidth = 0, padding = 5, background=palette_colors["primary"][1]),
-                # Flecha
+                # Powerline Arrow
                 widget.TextBox(font='Font Awesome 5 Free', text='', padding=0, fontsize=64,
                     background=palette_colors["primary"][1],
                     foreground=palette_colors["primary"][0]
                 ),
-                # Icono de reloj
+                # Clock Icon
                 widget.TextBox(
                     font = 'Font Awesome 5 Free',
                     text = '',
                     fontsize = 14,
                     background = palette_colors["primary"][0]
                 ),
-                # Espaciado
+                # Spacing
                 widget.Sep(linewidth = 0, padding = 3, background=palette_colors["primary"][0]),
-                # Widget Hora
+                # Time Widget
                 widget.Clock(
                     format='%I:%M %p',
                     background=palette_colors["primary"][0],
                 ),
-                # Espaciado borde derecho
+                # Right border spacing
                 widget.Sep(linewidth = 0, padding = 10, background = palette_colors["primary"][0])
             ],
             32,
         ),
-        wallpaper="/home/lambda/Pictures/Wallpapers/wallpaper.jpg",
+        wallpaper="~/.config/qtile/wallpaper.jpg",
         wallpaper_mode="fill"
     )
 ]
@@ -439,4 +445,4 @@ dgroups_key_binder = None
 focus_on_window_activation = "smart"
 follow_mouse_focus = False
 main = None  # WARNING: this is deprecated and will be removed soon
-wmname = "qtile" # window manager name, e.g. used in neofetch // problema con JAVA?
+wmname = "qtile" #! window manager name, e.g. used in neofetch // if having trouble with java, change to "LG3D"

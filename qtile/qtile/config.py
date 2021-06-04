@@ -197,6 +197,7 @@ if __name__ in ["config", "__main__"]:
 # =============================      LAYOUTS     =============================
 # ============================================================================
 layouts = [
+    layout.Max(name = "fullscreen"),
     layout.Columns(
         name = "columns",
         border_focus = palette_colors["secondary"][0],
@@ -206,8 +207,7 @@ layouts = [
         fair = False,
         num_columns = 2,
         margin = 3
-    ),
-    layout.Max(name = "fullscreen"),
+    )
     # layout.MonadTall(),
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),

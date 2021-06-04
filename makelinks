@@ -24,4 +24,13 @@ echo "================ Linking Qtile ================"
 [ -d "$HOME/.config/qtile" ] && rm -rf "$HOME/.config/qtile"
 stow -t "$HOME/.config" qtile/
 
+# REDSHIFT
+echo "================ Linking reshift ================"
+[ -f "$HOME/.config/redshift.conf" ] && rm "$HOME/.config/redshift.conf"
+stow -t "$HOME/.config" redshift/
+
+# CRONTAB
+echo "================ Linking crontab ================"
+crontab < crontab/crontab.txt
+
 echo "================== LINKS MADE ==================="

@@ -1,3 +1,7 @@
-#!/bin/sh
-killall compton;
-compton -b --config ~/.config/compton/compton.conf;
+#!/bin/bash
+
+killall compton
+compton -b --config "$HOME/.config/compton/compton.conf"
+
+killall redshift
+redshift

@@ -1,4 +1,2 @@
 # minute (m), hour (h), day of month (dom), month (mon),
 # m h  dom mon dow   command
-
-@reboot redshift

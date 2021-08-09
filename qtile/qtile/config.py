@@ -114,7 +114,7 @@ keys = [
     # ========== Move between groups ==========
     Key([mod], "Tab", lazy.screen.next_group(),
         desc="Go to next group"),
-     Key([mod, "shift"], "Tab", lazy.screen.prev_group(),
+    Key([mod, "shift"], "Tab", lazy.screen.prev_group(),
         desc="Go to next group"),
 
     # ========== Move between layouts ==========
@@ -424,15 +424,15 @@ screens = [
 # ============================================================================
 # =============================    SCRIPTS    ================================
 # ============================================================================
-#@hook.subscribe.startup_once
-#def startup_once():
+# @hook.subscribe.startup_once
+# def startup_once():
     # script = os.path.expanduser('~/.config/qtile/startup_once.sh')
-    # subprocess.call([script])
+    # subprocess.Popen([script])
 
 @hook.subscribe.startup
 def startup():
     script = os.path.expanduser('~/.config/qtile/startup.sh')
-    subprocess.call([script])
+    subprocess.Popen([script])
 
 # ============================================================================
 # =============================    CONFIGS    ================================

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 #
 # This is sp, the command-line Spotify controller. It talks to a running

@@ -1,0 +1,210 @@
+{
+	// * ============ GENERAL ============
+	"telemetry.enableTelemetry": false,
+	"update.showReleaseNotes": false,
+	
+	"editor.detectIndentation": true,
+	"editor.insertSpaces": false,
+	"editor.comments.insertSpace": false,
+	"editor.wordWrap": "on",
+	"editor.columnSelection": false,
+	"editor.trimAutoWhitespace": false,
+	
+	"workbench.editor.untitled.hint": "hidden",
+	"workbench.startupEditor": "readme",
+	
+	"editor.minimap.enabled": true,
+	
+	"explorer.confirmDelete": false,
+	"explorer.confirmDragAndDrop": false,
+	
+	"debug.onTaskErrors": "abort",
+	
+	"editor.multiCursorModifier": "ctrlCmd",
+	
+	"window.zoomLevel": 1,
+	"window.menuBarVisibility": "toggle",
+	
+	"terminal.integrated.defaultProfile.windows": "PowerShell",
+	"python.pythonPath": "/usr/bin/python2",
+	
+	// * ============ ESTETICA ============
+	"editor.fontFamily": "JetBrains Mono",
+	"editor.fontSize": 18,
+	"editor.fontLigatures": true,
+	"workbench.colorTheme": "1984 - Unbolded",
+	"workbench.iconTheme": "material-icon-theme",
+	"editor.cursorBlinking": "smooth",
+	"editor.cursorSmoothCaretAnimation": true,
+	"css.lint.emptyRules": "ignore",
+	
+	"bracket-pair-colorizer-2.colorMode":"Consecutive",
+	"bracket-pair-colorizer-2.colors": [
+		"#FFFFFF",
+		"#DD4CE0",
+		"#E04C9E",
+		"#E04C51",
+		"#E06E39"
+	],
+	
+	"indentRainbow.colors": [
+		"rgba(128,128,128,0.07)",
+		"rgba(221,76,224,0.07)",
+		"rgba(224,76,158,0.07)",
+		"rgba(224,76,81,0.07)",
+		"rgba(224,110,57,0.07)"
+	],
+	"indentRainbow.tabmixColor": "rgba(98, 200, 86, 0.25)",
+	"indentRainbow.excludedLanguages": [
+		"css"
+	],
+	
+	// * ============ COMENTARIOS ============
+	"better-comments.tags": [
+		{
+			"tag": "!",
+			"color": "#FF2D00",
+			"strikethrough": false,
+			"underline": false,
+			"backgroundColor": "transparent",
+			"bold": false,
+			"italic": false
+		},
+		{
+			"tag": "?",
+			"color": "#FF8C00",
+			"strikethrough": false,
+			"underline": false,
+			"backgroundColor": "transparent",
+			"bold": false,
+			"italic": false
+		},
+		{
+			"tag": "//",
+			"color": "#474747",
+			"strikethrough": true,
+			"underline": false,
+			"backgroundColor": "transparent",
+			"bold": false,
+			"italic": false
+		},
+		{
+			"tag": "todo",
+			"color": "#FF8C00",
+			"strikethrough": false,
+			"underline": false,
+			"backgroundColor": "transparent",
+			"bold": false,
+			"italic": false
+		},
+		{
+			"tag": "*",
+			"color": "#98C379",
+			"strikethrough": false,
+			"underline": false,
+			"backgroundColor": "transparent",
+			"bold": false,
+			"italic": false
+		},
+		{
+			"tag": "#",
+			"color": "#3498DB",
+			"strikethrough": false,
+			"underline": false,
+			"backgroundColor": "transparent",
+			"bold": false,
+			"italic": false
+		}
+	],
+	
+	// * ============ EXCLUSIONES ============
+	"files.exclude": {
+		".git": true,
+		"**/.git": false,
+		"**/.vs": true,
+		"**/**.dSYM": true,
+		"**/**.exe": true,
+		"**/**.pdf": true,
+		"**/**.sln": true,
+		"**/**.vcxproj": true,
+		"**/**.vcxproj.filters": true,
+		"**/**.vcxproj.user": true,
+		"**/imagenes": true,
+		"**/node_modules": true
+	},
+	
+	// * ============ GITLENS ============
+	"gitlens.defaultDateFormat": "DD/MM/YY H:m",
+	"gitlens.defaultDateShortFormat": "DD/MM/YY",
+	"gitlens.currentLine.enabled": false,
+	"gitlens.hovers.currentLine.over": "line",
+	"gitlens.advanced.messages": {
+		"suppressLineUncommittedWarning": true
+	},
+	"diffEditor.ignoreTrimWhitespace": false,
+	
+	"git.enableSmartCommit": true,
+	"git.confirmSync": false,
+	
+	"diffEditor.codeLens": true,
+	
+	// * ============ LIVE SERVER ============
+	"liveServer.settings.host": "localhost",
+	"liveServer.settings.port": 5000,
+	"liveServer.settings.CustomBrowser": "firefox",
+	"liveServer.settings.donotShowInfoMsg": true,
+	
+	// * ============ MATERIAL ICON THEME ============
+	"material-icon-theme.activeIconPack": "react",
+	"material-icon-theme.languages.associations": {},
+	"material-icon-theme.folders.associations": {
+		"rutas": "routes",
+		"controladores": "controller",
+		"modelos": "class",
+		"diseños": "mock",
+		"componentes": "react-components",
+		"utilidades": "utils"
+	},
+	
+	// * ============ DISCORD ============
+	"discord.detailsDebugging": "{file_name} ({total_lines} líneas)",
+	"discord.lowerDetailsDebugging": "{workspace}",
+	
+	"discord.detailsEditing": "{file_name} ({total_lines} líneas)",
+	"discord.lowerDetailsEditing": "{workspace}",
+	
+	"discord.detailsIdling": "zzz",
+	"discord.lowerDetailsIdling": "Probablemente dejé el editor abierto...",
+	"discord.largeImageIdling": "zzz",
+	
+	"discord.largeImage": "Codeando en {lang}",
+	
+	"discord.lowerDetailsNoWorkspaceFound": "En ningún proyecto",
+	
+	// * ============ POLACODE ============
+	"polacode.target": "snippet",
+	"polacode.transparentBackground": true,
+	
+	// * ============ FORMATEADORES ============
+	"[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[json]": {
+		"editor.defaultFormatter": "HookyQR.beautify"
+	},
+	"[jsonc]": {
+		"editor.defaultFormatter": "HookyQR.beautify"
+	},
+	
+	"editor.formatOnSave": true,
+	
+	"prettier.arrowParens": "avoid",
+	"prettier.bracketSpacing": false,
+	"prettier.embeddedLanguageFormatting": "off",
+	"prettier.printWidth": 90,
+	"prettier.quoteProps": "preserve",
+	"prettier.requireConfig": true,
+	"prettier.tabWidth": 4,
+	"prettier.trailingComma": "none",
+	"prettier.useTabs": true
+}

@@ -1,0 +1,18 @@
+{
+	"arrowParens": "avoid",
+	"bracketSpacing": false,
+	"embeddedLanguageFormatting": "off",
+	"endOfLine": "lf",
+	"insertPragma": false,
+	"jsxBracketSameLine": false,
+	"jsxSingleQuote": false,
+	"printWidth": 90,
+	"quoteProps": "preserve",
+	"rangeStart": 0,
+	"requirePragma": false,
+	"semi": true,
+	"singleQuote": false,
+	"useTabs": true,
+	"tabWidth": 4,
+	"trailingComma": "none"
+}

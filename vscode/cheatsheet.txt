@@ -1,0 +1,41 @@
+Q --- folding
+	ctrl: toggle folding
+
+W  --- windows
+	ctrl: close window
+	ctrl + shift: reopen window
+
+E --- selecting
+	ctrl: expand selection
+	ctrl + shift: shrink selection
+	alt: select line
+
+R --- indenting
+	ctrl: indent line
+	ctrl + shift: outdent line
+
+T --- diffing
+	ctrl: go to last edit
+	ctrl + shift: compare active with saved file
+
+S --- saving
+	ctrl: save file
+	ctrl + shift: save as
+
+D --- definitions
+	ctrl: peek definition
+	ctrl + shift: go to definiton
+	alt: rename symbol
+
+F --- finding
+	ctrl: find
+	ctrl + shift: replace
+	alt: find in files
+
+G --- goto
+	ctrl: go to line
+	ctrl + shift: go to file
+
+B --- commenting
+	ctrl: toggle line comment
+	ctrl + shift: toggle block comment

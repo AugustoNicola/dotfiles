@@ -3,12 +3,16 @@ red='\033[1;31m'
 green='\033[1;36m'
 reset='\033[0m'
 
-# * Check for all flag
+# * Check for flags
 allFlag="false"
-while getopts ":a" flag; do
+listFlag="false"
+while getopts ":al" flag; do
 	case ${flag} in
 		a)
 			allFlag="true"
+			;;
+		l)
+			listFlag="true"
 			;;
 		\?)
 			echo -e "${red}$0${reset}: The option -${OPTARG} is invalid." >&2
@@ -17,28 +21,72 @@ while getopts ":a" flag; do
 	esac
 done
 
-if [[ $allFlag != "true" && $# == "0" ]]; then
+if [[ $allFlag == "true" ]]; then
+	# * Link all
+
+	# # BASH
+	[ -f "$HOME/.bashrc" ] && rm "$HOME/.bashrc"
+	[ -f "$HOME/.bash_aliases" ] && rm "$HOME/.bash_aliases"
+	stow -t "$HOME" bash/
+	echo -e "${green}Bash linked successfully!${reset}"
+
+	# # COMPTON
+	[ -d "$HOME/.config/compton" ] && rm -rf "$HOME/.config/compton"
+	stow -t "$HOME/.config" compton/
+	echo -e "${green}Compton linked successfully!${reset}"
+
+	# # CRONTAB
+	crontab < crontab/crontab.txt
+	echo -e "${green}Crontab linked successfully!${reset}"
+
+	# # GIT
+	[ -f "$HOME/.gitconfig" ] && rm "$HOME/.gitconfig"
+	stow -t "$HOME" git/
+	echo -e "${green}Git linked successfully!${reset}"
+
+	# # NEOFETCH
+	[ -d "$HOME/.config/neofetch" ] && rm -rf "$HOME/.config/neofetch"
+	stow -t "$HOME/.config" neofetch/
+	echo -e "${green}Neofetch linked successfully!${reset}"
+
+	# # QTILE
+	[ -d "$HOME/.config/qtile" ] && rm -rf "$HOME/.config/qtile"
+	stow -t "$HOME/.config" qtile/
+	echo -e "${green}Qtile linked successfully!${reset}"
+
+	# # REDSHIFT
+	[ -f "$HOME/.config/redshift.conf" ] && rm "$HOME/.config/redshift.conf"
+	stow -t "$HOME/.config" redshift/
+	echo -e "${green}Redshift linked successfully!${reset}"
+		
+	# # VSCODE
+	[ -f "$HOME/.config/Code/User/settings.json" ] && rm "$HOME/.config/Code/User/settings.json"
+	[ -f "$HOME/.config/Code/User/keybindings.json" ] && rm "$HOME/.config/Code/User/keybindings.json"
+	[ -f "$HOME/.config/Code/User/.prettierrc" ] && rm "$HOME/.config/Code/User/.prettierrc"
+	[ -f "$HOME/.config/Code/User/cheatsheet.txt" ] && rm "$HOME/.config/Code/User/cheatsheet.txt"
+	stow -t "$HOME/.config/Code/User" vscode/
+	echo -e "${green}VSCode linked successfully!${reset}"
+
+elif [[ $listFlag == "true" ]]; then
+	# * List all possible targets
 	
-	# * Print help
 	cat <<EOF
-How to use:
+Possible targets:
 
-	./makelinks.sh [-a | TARGETS...]
-
-Where TARGETS are the names of the packages to link (separated by spaces).
--a: Select all targets.
-
-Examples:
-
-	./makelinks.sh bash
-	./makelinks.sh qtile redshift
-	./makelinks.sh -a
+	bash
+	compton
+	crontab
+	git
+	neofetch
+	qtile
+	redshift
+	vscode
 
 EOF
 
-elif [[ $allFlag != "true" ]]; then
-
+elif [[ ! $# == "0" ]]; then
 	# * Iterate over arguments received and link the ones found
+	
 	for i in $@; do
 
 		# # BASH
@@ -83,7 +131,16 @@ elif [[ $allFlag != "true" ]]; then
 			[ -f "$HOME/.config/redshift.conf" ] && rm "$HOME/.config/redshift.conf"
 			stow -t "$HOME/.config" redshift/
 			echo -e "${green}Redshift linked successfully!${reset}"
-		
+			
+		# # VSCODE
+		elif [[ $i == "vscode" ]]; then
+			[ -f "$HOME/.config/Code/User/settings.json" ] && rm "$HOME/.config/Code/User/settings.json"
+			[ -f "$HOME/.config/Code/User/keybindings.json" ] && rm "$HOME/.config/Code/User/keybindings.json"
+			[ -f "$HOME/.config/Code/User/.prettierrc" ] && rm "$HOME/.config/Code/User/.prettierrc"
+			[ -f "$HOME/.config/Code/User/cheatsheet.txt" ] && rm "$HOME/.config/Code/User/cheatsheet.txt"
+			stow -t "$HOME/.config/Code/User" vscode/
+			echo -e "${green}VSCode linked successfully!${reset}"
+			
 		# ? Not Found
 		else
 			echo -e "${red}$i not found!${reset}" >&2
@@ -91,43 +148,25 @@ elif [[ $allFlag != "true" ]]; then
 	done
 
 else
+	# * Print help
+	
+	cat <<EOF
+How to use:
 
-	# * Link all
+	./makelinks.sh [-a | -l | TARGETS...]
 
-	# # BASH
-		[ -f "$HOME/.bashrc" ] && rm "$HOME/.bashrc"
-		[ -f "$HOME/.bash_aliases" ] && rm "$HOME/.bash_aliases"
-		stow -t "$HOME" bash/
-		echo -e "${green}Bash linked successfully!${reset}"
+Where TARGETS are the names of the packages to link (separated by spaces).
+-a: Select all targets.
+-l: List all possible targets.
 
-	# # COMPTON
-		[ -d "$HOME/.config/compton" ] && rm -rf "$HOME/.config/compton"
-		stow -t "$HOME/.config" compton/
-		echo -e "${green}Compton linked successfully!${reset}"
+Examples:
 
-	# # CRONTAB
-		crontab < crontab/crontab.txt
-		echo -e "${green}Crontab linked successfully!${reset}"
+	./makelinks.sh bash
+	./makelinks.sh qtile redshift
+	./makelinks.sh -a
 
-	# # GIT
-		[ -f "$HOME/.gitconfig" ] && rm "$HOME/.gitconfig"
-		stow -t "$HOME" git/
-		echo -e "${green}Git linked successfully!${reset}"
+EOF
 
-	# # NEOFETCH
-		[ -d "$HOME/.config/neofetch" ] && rm -rf "$HOME/.config/neofetch"
-		stow -t "$HOME/.config" neofetch/
-		echo -e "${green}Neofetch linked successfully!${reset}"
-
-	# # QTILE
-		[ -d "$HOME/.config/qtile" ] && rm -rf "$HOME/.config/qtile"
-		stow -t "$HOME/.config" qtile/
-		echo -e "${green}Qtile linked successfully!${reset}"
-
-	# # REDSHIFT
-		[ -f "$HOME/.config/redshift.conf" ] && rm "$HOME/.config/redshift.conf"
-		stow -t "$HOME/.config" redshift/
-		echo -e "${green}Redshift linked successfully!${reset}"
 fi
 
 exit 0;

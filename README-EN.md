@@ -13,6 +13,7 @@
 * [Neofetch](neofetch/neofetch)
 * [Qtile](qtile/qtile)
 * [Redshift](redshift)
+* [VSCode](vscode)
 
 <br />
 

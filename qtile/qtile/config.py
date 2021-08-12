@@ -176,8 +176,8 @@ if __name__ in ["config", "__main__"]:
         ("WEB", {'label':'', 'matches': [Match(wm_class=["Firefox"])]}),
         ("DEV", {'label':'', 'matches': [Match(wm_class=["Code", "Sublime_text"])]}),
         ("TER", {'label':'', 'matches': [Match(wm_class=["Gnome-terminal"])]}),
-        ("DIS", {'label':'', 'matches': [Match(wm_class=["Discord"])]}),
-        ("MUS", {'label':'', 'matches': [Match(wm_class=["Spotify"])]}),
+        ("MUS", {'label':'', 'spawn': 'spotify'}),
+        ("DIS", {'label':'', 'spawn': 'discord'}),
         ("CFG", {'label':'', 'matches': [Match(wm_class=["Pavucontrol"])]})
     ]
     groups = [Group(name, init=True, persist=True, **kwargs) for name, kwargs in group_props]

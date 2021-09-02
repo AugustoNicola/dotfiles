@@ -149,11 +149,11 @@ keys = [
         desc="Take a screenshot of the current view, mouse included, and then open it in GIMP"),
 
     # ========== Spotify controls ==========
-    Key([alt], "F7", lazy.spawn(spotify_cli + " play"),
+    Key([], "XF86AudioPlay", lazy.spawn(spotify_cli + " play"),
         desc="Play/pause spotify"),
-    Key([alt], "F6", lazy.spawn(spotify_cli + " prev"),
+    Key([], "XF86AudioPrev", lazy.spawn(spotify_cli + " prev"),
         desc="Rewind spotify"),
-    Key([alt], "F8", lazy.spawn(spotify_cli + " next"),
+    Key([], "XF86AudioNext", lazy.spawn(spotify_cli + " next"),
         desc="Foward spotify"),
 
     # ========== Qtile interactions ==========

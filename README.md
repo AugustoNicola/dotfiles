@@ -43,6 +43,10 @@ Luego solo resta usar el script `makelinks.sh`:
 * Para instalar todos los paquetes
 
 		$ ./makelinks.sh -a
+		
+* Para listar los paquetes disponibles
+
+		$ ./makelinks.sh -l
 
 <br />
 

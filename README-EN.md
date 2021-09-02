@@ -45,7 +45,11 @@ Then just use the `makelinks.sh` script:
 
 		$ ./makelinks.sh -a
 		
+		
+* Listing all available packages
 
+		$ ./makelinks.sh -l
+		
 <br />
 
 ###  Contributing

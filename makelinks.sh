@@ -23,7 +23,12 @@ done
 
 if [[ $allFlag == "true" ]]; then
 	# * Link all
-
+	
+	# # ALACRITTY
+	[ -d "$HOME/.config/alacritty" ] && rm -rf "$HOME/.config/alacritty"
+	stow -t "$HOME/.config" alacritty/
+	echo -e "${green}Alacritty linked successfully!${reset}"
+	
 	# # BASH
 	[ -f "$HOME/.bashrc" ] && rm "$HOME/.bashrc"
 	[ -f "$HOME/.bash_aliases" ] && rm "$HOME/.bash_aliases"
@@ -79,6 +84,7 @@ elif [[ $listFlag == "true" ]]; then
 	cat <<EOF
 Possible targets:
 
+	alacritty
 	bash
 	compton
 	crontab
@@ -95,9 +101,15 @@ elif [[ ! $# == "0" ]]; then
 	# * Iterate over arguments received and link the ones found
 	
 	for i in $@; do
-
+		
+		# # ALACRITTY
+		if [[ $i == "alacritty" ]]; then
+			[ -d "$HOME/.config/alacritty" ] && rm -rf "$HOME/.config/alacritty"
+			stow -t "$HOME/.config" alacritty/
+			echo -e "${green}Alacritty linked successfully!${reset}"
+		
 		# # BASH
-		if [[ $i == "bash" ]]; then
+		elif [[ $i == "bash" ]]; then
 			[ -f "$HOME/.bashrc" ] && rm "$HOME/.bashrc"
 			[ -f "$HOME/.bash_aliases" ] && rm "$HOME/.bash_aliases"
 			[ -f "$HOME/.bash_variables" ] && rm "$HOME/.bash_variables"

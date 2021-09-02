@@ -6,6 +6,7 @@
 <br />
 
 ## Packages
+* [Alacritty](alacritty/alacritty)
 * [Bash](bash)
 * [Compton](compton/compton)
 * [Crontab](crontab)

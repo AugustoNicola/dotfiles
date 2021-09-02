@@ -57,7 +57,7 @@ mod = "mod4"
 alt = "mod1"
 
 #? programs used
-terminal = "gnome-terminal"
+terminal = "alacritty"
 web_browser = "firefox"
 file_explorer = "xdg-open ."
 github = "github-desktop"

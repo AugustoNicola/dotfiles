@@ -66,6 +66,11 @@ if [[ $allFlag == "true" ]]; then
 	[ -f "$HOME/.config/Code/User/cheatsheet.txt" ] && rm "$HOME/.config/Code/User/cheatsheet.txt"
 	stow -t "$HOME/.config/Code/User" vscode/
 	echo -e "${green}VSCode linked successfully!${reset}"
+	
+	# # ZATHYURA
+	[ -d "$HOME/.config/zathura" ] && rm -rf "$HOME/.config/zathura"
+	stow -t "$HOME/.config" zathura/
+	echo -e "${green}Zathura linked successfully!${reset}"
 
 elif [[ $listFlag == "true" ]]; then
 	# * List all possible targets
@@ -81,6 +86,7 @@ Possible targets:
 	qtile
 	redshift
 	vscode
+	zathura
 
 EOF
 
@@ -140,6 +146,12 @@ elif [[ ! $# == "0" ]]; then
 			[ -f "$HOME/.config/Code/User/cheatsheet.txt" ] && rm "$HOME/.config/Code/User/cheatsheet.txt"
 			stow -t "$HOME/.config/Code/User" vscode/
 			echo -e "${green}VSCode linked successfully!${reset}"
+			
+		# # ZATHURA
+		elif [[ $i == "zathura" ]]; then
+			[ -d "$HOME/.config/zathura" ] && rm -rf "$HOME/.config/zathura"
+			stow -t "$HOME/.config" zathura/
+			echo -e "${green}Zathura linked successfully!${reset}"
 			
 		# ? Not Found
 		else

@@ -1,0 +1,64 @@
+# # ============== DOCUMENT ==============
+
+set recolor                     true
+set recolor-lightcolor          "#350944" # document's background
+set recolor-darkcolor           "#788277" # document's text
+
+# set recolor-keephue           true      # keep original color
+
+# # ============= CONTAINER ==============
+
+set default-bg                  "#1d042c"
+# set default-fg                "#93a1a1" # foreground?
+
+# # ================ BAR =================
+
+set inputbar-bg                 "#252525"
+set inputbar-fg                 "#68B882"
+
+set statusbar-bg                "#214b46"
+set statusbar-fg                "#afc8bf"
+
+set notification-bg             "#193835"
+set notification-fg             "#afc8bf"
+
+set notification-warning-bg     "#422b07"
+set notification-warning-fg     "#afc8bf"
+
+set notification-error-bg       "#420a07"
+set notification-error-fg       "#afc8bf"
+
+# # ========== SEARCH HIGHLIGHT ==========
+
+set highlight-color             "#5ba194"
+set highlight-active-color      "#27f3a0"
+
+# # =============== INDEX ===============
+set index-bg                    "#193835"
+set index-fg                    "#afc8bf"
+set index-active-bg             "#214b46"
+set index-active-fg             "#afc8bf"
+
+# # ============== LOADING ===============
+set render-loading              true
+set render-loading-fg           "#788277"
+set render-loading-bg           "#1D1024"
+
+# * ============ KEYBINDINGS =============
+map w scroll up
+map s scroll down
+map a scroll left
+map d scroll right
+
+map <C-w> scroll half-up
+map <C-s> scroll half-down
+
+map e zoom in
+map <C-e> zoom out
+
+map r rotate rotate-cw
+map <C-r> rotate rotate-ccw
+
+map f toggle_fullscreen
+
+unmap q

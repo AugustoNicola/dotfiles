@@ -27,6 +27,7 @@ if [[ $allFlag == "true" ]]; then
 	# # BASH
 	[ -f "$HOME/.bashrc" ] && rm "$HOME/.bashrc"
 	[ -f "$HOME/.bash_aliases" ] && rm "$HOME/.bash_aliases"
+	[ -f "$HOME/.bash_logout" ] && rm "$HOME/.bash_logout"
 	stow -t "$HOME" bash/
 	echo -e "${green}Bash linked successfully!${reset}"
 

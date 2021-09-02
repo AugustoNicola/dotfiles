@@ -18,6 +18,7 @@
 * [Qtile](qtile/qtile)
 * [Redshift](redshift)
 * [VSCode](vscode)
+* [Zathura](zathura)
 
 Estos son los archivos de configuración que uso: mi gestor de ventanas, editor de texto, shell y algunos más, ~~en su mayoría~~ con comentarios en inglés. **¡Podés leer, usar o modificar el código que necesites!**
 

@@ -14,6 +14,7 @@
 * [Qtile](qtile/qtile)
 * [Redshift](redshift)
 * [VSCode](vscode)
+* [Zathura](zathura)
 
 <br />
 

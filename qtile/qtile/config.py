@@ -175,7 +175,7 @@ if __name__ in ["config", "__main__"]:
         ("HOME", {'label':'ﬦ'}),
         ("WEB", {'label':'', 'matches': [Match(wm_class=["Firefox"])]}),
         ("DEV", {'label':'', 'matches': [Match(wm_class=["Code", "Sublime_text"])]}),
-        ("TER", {'label':'', 'matches': [Match(wm_class=["Gnome-terminal"])]}),
+        ("TER", {'label':'', 'matches': [Match(wm_class=["Alacritty"])]}),
         ("MUS", {'label':'', 'spawn': 'spotify'}),
         ("DIS", {'label':'', 'spawn': 'discord'}),
         ("CFG", {'label':'', 'matches': [Match(wm_class=["Pavucontrol"])]})

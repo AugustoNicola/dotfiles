@@ -73,10 +73,15 @@ if [[ $allFlag == "true" ]]; then
 	stow -t "$HOME/.config/Code/User" vscode/
 	echo -e "${green}VSCode linked successfully!${reset}"
 	
-	# # ZATHYURA
+	# # ZATHURA
 	[ -d "$HOME/.config/zathura" ] && rm -rf "$HOME/.config/zathura"
 	stow -t "$HOME/.config" zathura/
 	echo -e "${green}Zathura linked successfully!${reset}"
+	
+	# # ZSH
+	[ -d "$HOME/.config/zsh" ] && rm -rf "$HOME/.config/zsh"
+	stow -t "$HOME/.config" zsh/
+	echo -e "${green}Zsh linked successfully!${reset}"
 
 elif [[ $listFlag == "true" ]]; then
 	# * List all possible targets
@@ -94,6 +99,7 @@ Possible targets:
 	redshift
 	vscode
 	zathura
+	zsh
 
 EOF
 
@@ -102,74 +108,83 @@ elif [[ ! $# == "0" ]]; then
 	
 	for i in $@; do
 		
-		# # ALACRITTY
-		if [[ $i == "alacritty" ]]; then
-			[ -d "$HOME/.config/alacritty" ] && rm -rf "$HOME/.config/alacritty"
-			stow -t "$HOME/.config" alacritty/
-			echo -e "${green}Alacritty linked successfully!${reset}"
-		
-		# # BASH
-		elif [[ $i == "bash" ]]; then
-			[ -f "$HOME/.bashrc" ] && rm "$HOME/.bashrc"
-			[ -f "$HOME/.bash_aliases" ] && rm "$HOME/.bash_aliases"
-			[ -f "$HOME/.bash_variables" ] && rm "$HOME/.bash_variables"
-			stow -t "$HOME" bash/
-			echo -e "${green}Bash linked successfully!${reset}"
-
-		# # COMPTON
-		elif [[ $i == "compton" ]]; then
-			[ -d "$HOME/.config/compton" ] && rm -rf "$HOME/.config/compton"
-			stow -t "$HOME/.config" compton/
-			echo -e "${green}Compton linked successfully!${reset}"
-
-		# # CRONTAB
-		elif [[ $i == "crontab" ]]; then
-			crontab < crontab/crontab.txt
-			echo -e "${green}Crontab linked successfully!${reset}"
-
-		# # GIT
-		elif [[ $i == "git" ]]; then
-			[ -f "$HOME/.gitconfig" ] && rm "$HOME/.gitconfig"
-			stow -t "$HOME" git/
-			echo -e "${green}Git linked successfully!${reset}"
-
-		# # NEOFETCH
-		elif [[ $i == "neofetch" ]]; then
-			[ -d "$HOME/.config/neofetch" ] && rm -rf "$HOME/.config/neofetch"
-			stow -t "$HOME/.config" neofetch/
-			echo -e "${green}Neofetch linked successfully!${reset}"
-
-		# # QTILE
-		elif [[ $i == "qtile" ]]; then
-			[ -d "$HOME/.config/qtile" ] && rm -rf "$HOME/.config/qtile"
-			stow -t "$HOME/.config" qtile/
-			echo -e "${green}Qtile linked successfully!${reset}"
-
-		# # REDSHIFT
-		elif [[ $i == "redshift" ]]; then
-			[ -f "$HOME/.config/redshift.conf" ] && rm "$HOME/.config/redshift.conf"
-			stow -t "$HOME/.config" redshift/
-			echo -e "${green}Redshift linked successfully!${reset}"
+		case $i in
 			
-		# # VSCODE
-		elif [[ $i == "vscode" ]]; then
-			[ -f "$HOME/.config/Code/User/settings.json" ] && rm "$HOME/.config/Code/User/settings.json"
-			[ -f "$HOME/.config/Code/User/keybindings.json" ] && rm "$HOME/.config/Code/User/keybindings.json"
-			[ -f "$HOME/.config/Code/User/.prettierrc" ] && rm "$HOME/.config/Code/User/.prettierrc"
-			[ -f "$HOME/.config/Code/User/cheatsheet.txt" ] && rm "$HOME/.config/Code/User/cheatsheet.txt"
-			stow -t "$HOME/.config/Code/User" vscode/
-			echo -e "${green}VSCode linked successfully!${reset}"
+			"alacritty")
+				[ -d "$HOME/.config/alacritty" ] && rm -rf "$HOME/.config/alacritty"
+				stow -t "$HOME/.config" alacritty/
+				echo -e "${green}Alacritty linked successfully!${reset}"
+				;;
 			
-		# # ZATHURA
-		elif [[ $i == "zathura" ]]; then
-			[ -d "$HOME/.config/zathura" ] && rm -rf "$HOME/.config/zathura"
-			stow -t "$HOME/.config" zathura/
-			echo -e "${green}Zathura linked successfully!${reset}"
+			"bash")
+				[ -f "$HOME/.bashrc" ] && rm "$HOME/.bashrc"
+				[ -f "$HOME/.bash_aliases" ] && rm "$HOME/.bash_aliases"
+				[ -f "$HOME/.bash_variables" ] && rm "$HOME/.bash_variables"
+				stow -t "$HOME" bash/
+				echo -e "${green}Bash linked successfully!${reset}"
+				;;
 			
-		# ? Not Found
-		else
-			echo -e "${red}$i not found!${reset}" >&2
-		fi
+			"compton")
+				[ -d "$HOME/.config/compton" ] && rm -rf "$HOME/.config/compton"
+				stow -t "$HOME/.config" compton/
+				echo -e "${green}Compton linked successfully!${reset}"
+				;;
+			
+			"crontab")
+				crontab < crontab/crontab.txt
+				echo -e "${green}Crontab linked successfully!${reset}"
+				;;
+			
+			"git")
+				[ -f "$HOME/.gitconfig" ] && rm "$HOME/.gitconfig"
+				stow -t "$HOME" git/
+				echo -e "${green}Git linked successfully!${reset}"
+				;;
+			
+			"neofetch")
+				[ -d "$HOME/.config/neofetch" ] && rm -rf "$HOME/.config/neofetch"
+				stow -t "$HOME/.config" neofetch/
+				echo -e "${green}Neofetch linked successfully!${reset}"
+				;;
+			
+			"qtile")
+				[ -d "$HOME/.config/qtile" ] && rm -rf "$HOME/.config/qtile"
+				stow -t "$HOME/.config" qtile/
+				echo -e "${green}Qtile linked successfully!${reset}"
+				;;
+			
+			"redshift")
+				[ -f "$HOME/.config/redshift.conf" ] && rm "$HOME/.config/redshift.conf"
+				stow -t "$HOME/.config" redshift/
+				echo -e "${green}Redshift linked successfully!${reset}"
+				;;
+				
+			"vscode")
+				[ -f "$HOME/.config/Code/User/settings.json" ] && rm "$HOME/.config/Code/User/settings.json"
+				[ -f "$HOME/.config/Code/User/keybindings.json" ] && rm "$HOME/.config/Code/User/keybindings.json"
+				[ -f "$HOME/.config/Code/User/.prettierrc" ] && rm "$HOME/.config/Code/User/.prettierrc"
+				[ -f "$HOME/.config/Code/User/cheatsheet.txt" ] && rm "$HOME/.config/Code/User/cheatsheet.txt"
+				stow -t "$HOME/.config/Code/User" vscode/
+				echo -e "${green}VSCode linked successfully!${reset}"
+				;;
+			
+			"zathura")
+				[ -d "$HOME/.config/zathura" ] && rm -rf "$HOME/.config/zathura"
+				stow -t "$HOME/.config" zathura/
+				echo -e "${green}Zathura linked successfully!${reset}"
+				;;
+			
+			"zsh")
+				[ -d "$HOME/.config/zsh" ] && rm -rf "$HOME/.config/zsh"
+				stow -t "$HOME/.config" zsh/
+				echo -e "${green}Zsh linked successfully!${reset}"
+				;;
+			
+			# ? Not Found
+			*)
+				echo -e "${red}$i not found!${reset}" >&2
+				;;
+		esac
 	done
 
 else

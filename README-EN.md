@@ -16,6 +16,7 @@
 * [Redshift](redshift)
 * [VSCode](vscode)
 * [Zathura](zathura)
+* [Zsh](zsh/zsh)
 
 <br />
 

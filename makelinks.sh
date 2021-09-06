@@ -1,3 +1,4 @@
+#!/bin/bash
 # ANSI Escape codes:
 red='\033[1;31m'
 green='\033[1;36m'
@@ -45,11 +46,6 @@ if [[ $allFlag == "true" ]]; then
 	crontab < crontab/crontab.txt
 	echo -e "${green}Crontab linked successfully!${reset}"
 
-	# # GIT
-	[ -f "$HOME/.gitconfig" ] && rm "$HOME/.gitconfig"
-	stow -t "$HOME" git/
-	echo -e "${green}Git linked successfully!${reset}"
-
 	# # NEOFETCH
 	[ -d "$HOME/.config/neofetch" ] && rm -rf "$HOME/.config/neofetch"
 	stow -t "$HOME/.config" neofetch/
@@ -64,6 +60,11 @@ if [[ $allFlag == "true" ]]; then
 	[ -f "$HOME/.config/redshift.conf" ] && rm "$HOME/.config/redshift.conf"
 	stow -t "$HOME/.config" redshift/
 	echo -e "${green}Redshift linked successfully!${reset}"
+	
+	# # ROFI
+	[ -d "$HOME/.config/rofi" ] && rm -rf "$HOME/.config/rofi"
+	stow -t "$HOME/.config" rofi/
+	echo -e "${green}Rofi linked successfully!${reset}"
 		
 	# # VSCODE
 	[ -f "$HOME/.config/Code/User/settings.json" ] && rm "$HOME/.config/Code/User/settings.json"
@@ -93,10 +94,10 @@ Possible targets:
 	bash
 	compton
 	crontab
-	git
 	neofetch
 	qtile
 	redshift
+	rofi
 	vscode
 	zathura
 	zsh
@@ -135,12 +136,6 @@ elif [[ ! $# == "0" ]]; then
 				echo -e "${green}Crontab linked successfully!${reset}"
 				;;
 			
-			"git")
-				[ -f "$HOME/.gitconfig" ] && rm "$HOME/.gitconfig"
-				stow -t "$HOME" git/
-				echo -e "${green}Git linked successfully!${reset}"
-				;;
-			
 			"neofetch")
 				[ -d "$HOME/.config/neofetch" ] && rm -rf "$HOME/.config/neofetch"
 				stow -t "$HOME/.config" neofetch/
@@ -158,7 +153,13 @@ elif [[ ! $# == "0" ]]; then
 				stow -t "$HOME/.config" redshift/
 				echo -e "${green}Redshift linked successfully!${reset}"
 				;;
-				
+			
+			"rofi")
+				[ -d "$HOME/.config/rofi" ] && rm -rf "$HOME/.config/rofi"
+				stow -t "$HOME/.config" rofi/
+				echo -e "${green}Rofi linked successfully!${reset}"
+				;;
+			
 			"vscode")
 				[ -f "$HOME/.config/Code/User/settings.json" ] && rm "$HOME/.config/Code/User/settings.json"
 				[ -f "$HOME/.config/Code/User/keybindings.json" ] && rm "$HOME/.config/Code/User/keybindings.json"
@@ -204,6 +205,7 @@ Examples:
 	./makelinks.sh bash
 	./makelinks.sh qtile redshift
 	./makelinks.sh -a
+	./makelinks.sh -l
 
 EOF
 

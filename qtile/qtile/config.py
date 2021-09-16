@@ -27,6 +27,7 @@
 
 import os
 import subprocess
+import random
 
 from typing import List  # noqa: F401
 
@@ -283,6 +284,15 @@ widget_defaults = dict(
 )
 extension_defaults = widget_defaults.copy()
 
+# * Wallpaper random selection
+n=0
+random.seed();
+for root, dirs, files in os.walk('/home/lambda/Pictures/Wallpapers/'):
+    for name in files:
+        n += 1
+        if random.uniform(0, n) < 1:
+            wallpaper=os.path.join(root, name)
+
 screens = [
     Screen(
         bottom=bar.Bar(
@@ -416,7 +426,7 @@ screens = [
             ],
             32,
         ),
-        wallpaper="~/.config/qtile/wallpaper.jpg",
+        wallpaper=wallpaper,
         wallpaper_mode="fill"
     )
 ]
@@ -424,10 +434,10 @@ screens = [
 # ============================================================================
 # =============================    SCRIPTS    ================================
 # ============================================================================
-# @hook.subscribe.startup_once
-# def startup_once():
-    # script = os.path.expanduser('~/.config/qtile/startup_once.sh')
-    # subprocess.Popen([script])
+@hook.subscribe.startup_once
+def startup_once():
+    script = os.path.expanduser('~/.config/qtile/startup_once.sh')
+    subprocess.call([script])
 
 @hook.subscribe.startup
 def startup():

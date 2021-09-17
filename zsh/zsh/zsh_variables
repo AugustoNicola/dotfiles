@@ -1,1 +1,4 @@
 export DOTFILES="$HOME/dotfiles/"
+
+export SPICETIFY_INSTALL="/home/lambda/spicetify-cli"
+export PATH="$SPICETIFY_INSTALL:$PATH"

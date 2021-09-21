@@ -10,6 +10,7 @@
 * [Bash](bash)
 * [Compton](compton/compton)
 * [Crontab](crontab)
+* [Plymouth](plymouth/circle)
 * [Neofetch](neofetch/neofetch)
 * [Qtile](qtile/qtile)
 * [Redshift](redshift)

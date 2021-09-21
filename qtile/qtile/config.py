@@ -287,7 +287,7 @@ extension_defaults = widget_defaults.copy()
 # * Wallpaper random selection
 n=0
 random.seed();
-for root, dirs, files in os.walk('/home/lambda/Pictures/Wallpapers/'):
+for root, dirs, files in os.walk('/home/lambda/dotfiles/wallpapers/'):
     for name in files:
         n += 1
         if random.uniform(0, n) < 1:

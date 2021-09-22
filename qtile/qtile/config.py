@@ -28,14 +28,19 @@
 import os
 import subprocess
 import random
+from datetime import datetime, timezone
+import locale
 
 from typing import List  # noqa: F401
 
 from libqtile import bar, layout, widget, hook, qtile
+from libqtile.widget import base
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.command import lazy as lazy_cmd
 from libqtile.utils import guess_terminal
+
+locale.setlocale(locale.LC_TIME, "es_AR.utf8")
 
 #* colors used throughout the layout
 palette_colors = {
@@ -255,7 +260,73 @@ def open_audio_settings():
     qtile.cmd_spawn('pavucontrol')
     if qtile.current_group.name != "CFG":
         qtile.groups_map["CFG"].cmd_toscreen()
+        
+def open_calendar():
+    qtile.cmd_spawn("gnome-calendar")
 
+def open_clock():
+    qtile.cmd_spawn("gnome-clocks")
+
+# ============================================================================
+# ============================    WIDGETS     ================================
+# ============================================================================
+class CustomCalendar(base.InLoopPollText):
+    
+    defaults = [
+        ("update_interval", 1., "How many seconds between updates"),
+        ("background_color", "#000000", "Color of the widget's background"),
+        ("foreground_color", "#FFFFFF", "Color of the widget's text")
+    ]
+    
+    def __init__(self, background_color, foreground_color, **config):
+        base.InLoopPollText.__init__(self, background=background_color, foreground=foreground_color, **config)
+        self.add_defaults(CustomCalendar.defaults)
+        self.background_color = background_color
+        self.foreground_color = foreground_color
+    
+    def tick(self):
+        self.update(self.poll())
+    
+    def poll(self):
+        # locale is set at the start of the config file in order to display the weekday in spanish
+        return datetime.now().strftime("%Y/%m/%d %A").title()
+        
+    def mouse_enter(self, x, y):
+        self.foreground = "#CACACA"
+        self.draw()
+    
+    def mouse_leave(self, x, y):
+        self.foreground = self.foreground_color
+        self.draw()
+
+class CustomClock(base.InLoopPollText):
+    
+    defaults = [
+        ("update_interval", 1., "How many seconds between updates"),
+        ("background_color", "#000000", "Color of the widget's background"),
+        ("foreground_color", "#FFFFFF", "Color of the widget's text")
+    ]
+    
+    def __init__(self, background_color, foreground_color, **config):
+        base.InLoopPollText.__init__(self, background=background_color, foreground=foreground_color, **config)
+        self.add_defaults(CustomCalendar.defaults)
+        self.background_color = background_color
+        self.foreground_color = foreground_color
+    
+    def tick(self):
+        self.update(self.poll())
+    
+    def poll(self):
+        # 12-hour padding doesn't seem to work with the spanish locale
+        return datetime.now().strftime("%X")
+        
+    def mouse_enter(self, x, y):
+        self.foreground = "#CACACA"
+        self.draw()
+    
+    def mouse_leave(self, x, y):
+        self.foreground = self.foreground_color
+        self.draw()
 
 # ============================================================================
 # ============================    SCREENS     ================================
@@ -396,10 +467,11 @@ screens = [
                 # Spacing
                 widget.Sep(linewidth = 0, padding = 3, background=palette_colors["primary"][1]),
                 # Date Widget
-                widget.Clock(
-                    format='%Y/%m/%d %a', #! embrace ISO 8601
-                    background=palette_colors["primary"][1],
-                ),
+                CustomCalendar(background_color=palette_colors["primary"][1], foreground_color="#FFFFFF", mouse_callbacks = {'Button1': open_calendar}),
+                #widget.Clock(
+                #    format=f'%Y/%m/%d {weekDay}', #! embrace ISO 8601
+                #    background=palette_colors["primary"][1],
+                #),
                 # Spacing
                 widget.Sep(linewidth = 0, padding = 5, background=palette_colors["primary"][1]),
                 # Powerline Arrow
@@ -417,10 +489,11 @@ screens = [
                 # Spacing
                 widget.Sep(linewidth = 0, padding = 3, background=palette_colors["primary"][0]),
                 # Time Widget
-                widget.Clock(
-                    format='%I:%M %p',
-                    background=palette_colors["primary"][0],
-                ),
+                CustomClock(background_color=palette_colors["primary"][0], foreground_color="#FFFFFF", mouse_callbacks = {'Button1': open_clock}),
+                #widget.Clock(
+                #    format='%H:%M',
+                #    background=palette_colors["primary"][0],
+                #),
                 # Right border spacing
                 widget.Sep(linewidth = 0, padding = 10, background = palette_colors["primary"][0])
             ],

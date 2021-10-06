@@ -1,0 +1,6 @@
+colors.scheme=lambda
+visualizer.spectrum.bar.spacing=1
+visualizer.sgs.smoothing.passes=3
+visualizer.spectrum.falloff.mode=fill
+visualizer.spectrum.bar.width=2
+visualizer.spectrum.bar.spacing=1

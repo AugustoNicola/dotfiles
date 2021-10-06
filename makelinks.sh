@@ -65,7 +65,12 @@ if [[ $allFlag == "true" ]]; then
 	[ -d "$HOME/.config/rofi" ] && rm -rf "$HOME/.config/rofi"
 	stow -t "$HOME/.config" rofi/
 	echo -e "${green}Rofi linked successfully!${reset}"
-		
+	
+	# # VIS
+	[ -d "$HOME/.config/vis" ] && rm -rf "$HOME/.config/vis"
+	stow -t "$HOME/.config" vis/
+	echo -e "${green}Vis linked successfully!${reset}"
+	
 	# # VSCODE
 	[ -f "$HOME/.config/Code/User/settings.json" ] && rm "$HOME/.config/Code/User/settings.json"
 	[ -f "$HOME/.config/Code/User/keybindings.json" ] && rm "$HOME/.config/Code/User/keybindings.json"
@@ -98,6 +103,7 @@ Possible targets:
 	qtile
 	redshift
 	rofi
+	vis
 	vscode
 	zathura
 	zsh
@@ -158,6 +164,12 @@ elif [[ ! $# == "0" ]]; then
 				[ -d "$HOME/.config/rofi" ] && rm -rf "$HOME/.config/rofi"
 				stow -t "$HOME/.config" rofi/
 				echo -e "${green}Rofi linked successfully!${reset}"
+				;;
+			
+			"vis")
+				[ -d "$HOME/.config/vis" ] && rm -rf "$HOME/.config/vis"
+				stow -t "$HOME/.config" vis/
+				echo -e "${green}Vis linked successfully!${reset}"
 				;;
 			
 			"vscode")

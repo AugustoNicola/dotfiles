@@ -19,6 +19,7 @@
 * [Qtile](qtile/qtile)
 * [Redshift](redshift)
 * [Rofi](rofi/rofi)
+* [Vis](vis/vis)
 * [VSCode](vscode)
 * [Zathura](zathura)
 * [Zsh](zsh/zsh)

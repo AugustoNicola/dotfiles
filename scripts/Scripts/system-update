@@ -1,0 +1,45 @@
+#!/usr/bin/zsh
+
+source /home/lambda/.config/zsh/zsh_variables
+
+#* output coloring variables
+normal=$( tput sgr 0 );
+red=$( tput setaf 1 );
+green=$( tput setaf 2 );
+yellow=$( tput setaf 3 );
+blue=$( tput setaf 4 );
+magenta=$( tput setaf 5 );
+cyan=$( tput setaf 6 );
+white=$( tput setaf 7 );
+
+if [[ ${UID} != 0 ]]; then
+    echo "${red}$( basename $0 )${normal}: This script must be run as root or with sudo permissions. Please run using sudo."
+    exit 1
+fi
+
+# Log usage
+echo "$( date +'%F %T' ) $( basename $0 )" >> $LOGS_DIR/general.log 
+
+echo "#? ========= $( date +'%F %T' ) =========" >> $LOGS_DIR/system-update.log
+
+echo "#* --------- Updating database ---------" >> $LOGS_DIR/system-update.log
+echo "${cyan}$( basename $0 )${normal}: Updating apt database...${normal}"
+apt-get update | tee -a $LOGS_DIR/system-update.log &>/dev/null
+read -r aptstatus teestatus <<< "$pipestatus"
+if [[ $aptstatus == "0" ]]; then
+    echo "${green}$( basename $0 )${normal}: Database updated${normal}"
+else
+    echo "${red}$( basename $0 )${normal}: Error updating database!${normal}"
+    exit 2
+fi
+
+echo "#* --------- Upgrading packages ---------" >> $LOGS_DIR/system-update.log
+echo "${cyan}$( basename $0 )${normal}: Upgrading apt packages...${normal}"
+apt-get dist-upgrade -y | tee -a $LOGS_DIR/system-update.log &>/dev/null
+read -r aptstatus teestatus <<< "$pipestatus"
+if [[ $aptstatus == "0" ]]; then
+    echo "${green}$( basename $0 )${normal}: Packages installed correctly${normal}"
+else
+    echo "${red}$( basename $0 )${normal}: Error upgrading packages!${normal}"
+    exit 3
+fi

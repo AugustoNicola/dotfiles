@@ -36,26 +36,31 @@ if [[ $allFlag == "true" ]]; then
 	[ -f "$HOME/.bash_logout" ] && rm "$HOME/.bash_logout"
 	stow -t "$HOME" bash/
 	echo -e "${green}Bash linked successfully!${reset}"
-
+	
 	# # COMPTON
 	[ -d "$HOME/.config/compton" ] && rm -rf "$HOME/.config/compton"
 	stow -t "$HOME/.config" compton/
 	echo -e "${green}Compton linked successfully!${reset}"
-
+	
 	# # CRONTAB
 	crontab < crontab/crontab.txt
 	echo -e "${green}Crontab linked successfully!${reset}"
-
+	
+	# # SCRIPTS
+	[ -d "$HOME/Scripts" ] && rm -rf "$HOME/Scripts"
+	stow -t "$HOME" scripts/ 
+	echo -e "${green}Scripts linked successfully!${reset}"
+	
 	# # NEOFETCH
 	[ -d "$HOME/.config/neofetch" ] && rm -rf "$HOME/.config/neofetch"
 	stow -t "$HOME/.config" neofetch/
 	echo -e "${green}Neofetch linked successfully!${reset}"
-
+	
 	# # QTILE
 	[ -d "$HOME/.config/qtile" ] && rm -rf "$HOME/.config/qtile"
 	stow -t "$HOME/.config" qtile/
 	echo -e "${green}Qtile linked successfully!${reset}"
-
+	
 	# # REDSHIFT
 	[ -f "$HOME/.config/redshift.conf" ] && rm "$HOME/.config/redshift.conf"
 	stow -t "$HOME/.config" redshift/
@@ -99,6 +104,7 @@ Possible targets:
 	bash
 	compton
 	crontab
+	scripts
 	neofetch
 	qtile
 	redshift
@@ -140,6 +146,12 @@ elif [[ ! $# == "0" ]]; then
 			"crontab")
 				crontab < crontab/crontab.txt
 				echo -e "${green}Crontab linked successfully!${reset}"
+				;;
+			
+			"scripts")
+				[ -d "$HOME/Scripts" ] && rm -rf "$HOME/Scripts"
+				stow -t "$HOME" scripts/ 
+				echo -e "${green}Scripts linked successfully!${reset}"
 				;;
 			
 			"neofetch")

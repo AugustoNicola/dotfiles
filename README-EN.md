@@ -5,6 +5,10 @@
 
 <br />
 
+![Screenshot](screenshot2.png)
+
+<br />
+
 ## Packages
 * [Alacritty](alacritty/alacritty)
 * [Bash](bash)

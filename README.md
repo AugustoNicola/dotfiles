@@ -5,6 +5,10 @@
 
 <br />
 
+![Screenshot](screenshot2.png)
+
+<br />
+
 ### [English README here :uk: :us:](README-EN.md)
 
 <br />

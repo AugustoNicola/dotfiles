@@ -18,7 +18,7 @@
 * [Bash](bash)
 * [Compton](compton/compton)
 * [Crontab](crontab)
-* [Mis Scripts](Scripts)
+* [Mis Scripts](scripts/Scripts)
 * [Neofetch](neofetch/neofetch)
 * [Plymouth](plymouth/circle)
 * [Qtile](qtile/qtile)

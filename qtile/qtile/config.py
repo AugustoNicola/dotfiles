@@ -270,6 +270,28 @@ def open_clock():
 # ============================================================================
 # ============================    WIDGETS     ================================
 # ============================================================================
+class TrayIcon(base._TextBox):
+    
+    defaults = [
+        ("text", "X", "Actual icon that is displayed"),
+        ("font", "JetBrains Mono Bold", "Font of the icon"),
+        ("fontsize", 13.5, "Size of the icon"),
+        ("background_color", "#000000", "Color of the widget's background"),
+        ("foreground_color", "#FFFFFF", "Color of the widget's text")
+    ]
+    
+    def __init__(self, text, font, fontsize, background_color, foreground_color, width=bar.CALCULATED, **config):
+        base._TextBox.__init__(self, background=background_color, foreground=foreground_color, text=text, font=font, fontsize=fontsize, width=width, **config)
+        self.add_defaults(TrayIcon.defaults)
+    
+    def mouse_enter(self, x, y):
+        self.foreground = "#CACACA"
+        self.draw()
+    
+    def mouse_leave(self, x, y):
+        self.foreground = self.foreground_color
+        self.draw()
+
 class CustomCalendar(base.InLoopPollText):
     
     defaults = [
@@ -433,21 +455,23 @@ screens = [
                     foreground = palette_colors["primary"][2]
                 ),
                 # Internet Icon
-                widget.TextBox(
-                    font = 'Font Awesome 5 Free',
-                    text = '',
-                    fontsize = 13.5,
-                    background = palette_colors["primary"][2],
+                TrayIcon(
+                    background_color = palette_colors["primary"][2],
+                    foreground_color = "#FFFFFF",
+                    text='',
+                    font="Font Awesome 5 Free",
+                    fontsize = 14.5,
                     mouse_callbacks = {'Button1': open_wifi_settings}
                 ),
                 # Spacing between Icons
                 widget.Sep(linewidth = 0, padding = 5, background = palette_colors["primary"][2]),
-                # Icono de audio
-                widget.TextBox(
-                    font = 'Font Awesome 5 Free',
-                    text = '',
-                    fontsize = 13.5,
-                    background = palette_colors["primary"][2],
+                # Audio Icon
+                TrayIcon(
+                    background_color = palette_colors["primary"][2],
+                    foreground_color = "#FFFFFF",
+                    text='',
+                    font="Font Awesome 5 Free",
+                    fontsize = 14.5,
                     mouse_callbacks = {'Button1': open_audio_settings}
                 ),
                 # Spacing

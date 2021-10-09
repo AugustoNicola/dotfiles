@@ -12,34 +12,65 @@ magenta=$( tput setaf 5 );
 cyan=$( tput setaf 6 );
 white=$( tput setaf 7 );
 
+# utilitiy for only echoing to output when not in quiet mode
+out_echo() {
+	[[ $quietFlag == "true" ]] || echo $@
+}
+
 if [[ ${UID} != 0 ]]; then
     echo "${red}$( basename $0 )${normal}: This script must be run as root or with sudo permissions. Please run using sudo."
     exit 1
 fi
 
-# Log usage
+# # Check for flags
+quietFlag="false"
+verboseFlag="false"
+while getopts ":qv" flag; do
+	case ${flag} in
+		q)
+			quietFlag="true"
+			;;
+		v)
+			verboseFlag="true"
+			;;
+		\?)
+			echo -e "${red}$( basename $0 )${reset}: The option -${OPTARG} is invalid." >&2
+			exit 404
+			;;
+	esac
+done
+
+
+# # Log usage
 echo "$( date +'%F %T' ) $( basename $0 )" >> $LOGS/general.log 
 
 echo "#? ========= $( date +'%F %T' ) =========" >> $LOGS/system-update.log
 
 echo "#* --------- Updating database ---------" >> $LOGS/system-update.log
-echo "${cyan}$( basename $0 )${normal}: Updating apt database...${normal}"
-apt-get update | tee -a $LOGS/system-update.log &>/dev/null
-read -r aptstatus teestatus <<< "$pipestatus"
-if [[ $aptstatus == "0" ]]; then
-    echo "${green}$( basename $0 )${normal}: Database updated${normal}"
+out_echo "${cyan}$( basename $0 )${normal}: Updating apt database...${normal}"
+
+{ apt-get update 2>&1; } >> $LOGS/system-update.log
+
+if [[ $pipestatus == "0" ]]; then
+    out_echo "${green}$( basename $0 )${normal}: Database updated${normal}"
 else
-    echo "${red}$( basename $0 )${normal}: Error updating database!${normal}"
+    out_echo "${red}$( basename $0 )${normal}: Error updating database!${normal}"
     exit 2
 fi
 
+if [[ $verboseFlag == "true" && $quietFlag != "true" ]]; then
+    echo "${blue}$( basename $0 )${normal}: Packages to be updated:"
+    apt list --upgradable
+fi
+
 echo "#* --------- Upgrading packages ---------" >> $LOGS/system-update.log
-echo "${cyan}$( basename $0 )${normal}: Upgrading apt packages...${normal}"
-apt-get dist-upgrade -y | tee -a $LOGS/system-update.log &>/dev/null
-read -r aptstatus teestatus <<< "$pipestatus"
-if [[ $aptstatus == "0" ]]; then
-    echo "${green}$( basename $0 )${normal}: Packages installed correctly${normal}"
+out_echo "${cyan}$( basename $0 )${normal}: Upgrading apt packages...${normal}"
+
+{ apt-get dist-upgrade -y 2>&1; } >> $LOGS/system-update.log
+
+if [[ $pipestatus == "0" ]]; then
+    out_echo "${green}$( basename $0 )${normal}: Packages installed correctly${normal}"
 else
-    echo "${red}$( basename $0 )${normal}: Error upgrading packages!${normal}"
+    out_echo "${red}$( basename $0 )${normal}: Error upgrading packages!${normal}"
     exit 3
 fi

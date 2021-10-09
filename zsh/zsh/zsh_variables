@@ -1,7 +1,8 @@
 export DOTFILES="$HOME/dotfiles/"
-export SCRIPTS="$HOME/Scripts"
-export LOGS="$HOME/Logs"
 
-export SPICETIFY_INSTALL="$HOME/spicetify-cli"
+export SPICETIFY_INSTALL="/home/lambda/spicetify-cli"
 
-export PATH="$PATH:$SCRIPTS:$SPICETIFY_INSTALL"
+export SCRIPTS_DIR="/home/lambda/Scripts"
+export LOGS_DIR="/home/lambda/Logs"
+
+export PATH="$PATH:$SPICETIFY_INSTALL:$SCRIPTS_DIR"

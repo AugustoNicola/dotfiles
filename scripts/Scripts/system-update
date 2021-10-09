@@ -18,13 +18,13 @@ if [[ ${UID} != 0 ]]; then
 fi
 
 # Log usage
-echo "$( date +'%F %T' ) $( basename $0 )" >> $LOGS_DIR/general.log 
+echo "$( date +'%F %T' ) $( basename $0 )" >> $LOGS/general.log 
 
-echo "#? ========= $( date +'%F %T' ) =========" >> $LOGS_DIR/system-update.log
+echo "#? ========= $( date +'%F %T' ) =========" >> $LOGS/system-update.log
 
-echo "#* --------- Updating database ---------" >> $LOGS_DIR/system-update.log
+echo "#* --------- Updating database ---------" >> $LOGS/system-update.log
 echo "${cyan}$( basename $0 )${normal}: Updating apt database...${normal}"
-apt-get update | tee -a $LOGS_DIR/system-update.log &>/dev/null
+apt-get update | tee -a $LOGS/system-update.log &>/dev/null
 read -r aptstatus teestatus <<< "$pipestatus"
 if [[ $aptstatus == "0" ]]; then
     echo "${green}$( basename $0 )${normal}: Database updated${normal}"
@@ -33,9 +33,9 @@ else
     exit 2
 fi
 
-echo "#* --------- Upgrading packages ---------" >> $LOGS_DIR/system-update.log
+echo "#* --------- Upgrading packages ---------" >> $LOGS/system-update.log
 echo "${cyan}$( basename $0 )${normal}: Upgrading apt packages...${normal}"
-apt-get dist-upgrade -y | tee -a $LOGS_DIR/system-update.log &>/dev/null
+apt-get dist-upgrade -y | tee -a $LOGS/system-update.log &>/dev/null
 read -r aptstatus teestatus <<< "$pipestatus"
 if [[ $aptstatus == "0" ]]; then
     echo "${green}$( basename $0 )${normal}: Packages installed correctly${normal}"

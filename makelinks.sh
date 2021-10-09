@@ -1,8 +1,8 @@
 #!/bin/bash
-# ANSI Escape codes:
-red='\033[1;31m'
-green='\033[1;36m'
-reset='\033[0m'
+#* output coloring variables
+reset=$( tput sgr 0 );
+red=$( tput setaf 1 );
+green=$( tput setaf 2 );
 
 # * Check for flags
 allFlag="false"

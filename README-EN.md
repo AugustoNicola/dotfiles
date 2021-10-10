@@ -11,9 +11,9 @@
 
 ## Packages
 * [Alacritty](alacritty/alacritty)
+* [Anacron](anacron)
 * [Bash](bash)
 * [Compton](compton/compton)
-* [Crontab](crontab)
 * [My Scripts](scripts/Scripts)
 * [Neofetch](neofetch/neofetch)
 * [Plymouth](plymouth/circle)

@@ -42,10 +42,6 @@ if [[ $allFlag == "true" ]]; then
 	stow -t "$HOME/.config" compton/
 	echo -e "${green}Compton linked successfully!${reset}"
 	
-	# # CRONTAB
-	crontab < crontab/crontab.txt
-	echo -e "${green}Crontab linked successfully!${reset}"
-	
 	# # SCRIPTS
 	[ -d "$HOME/Scripts" ] && rm -rf "$HOME/Scripts"
 	stow -t "$HOME" scripts/ 
@@ -103,7 +99,6 @@ Possible targets:
 	alacritty
 	bash
 	compton
-	crontab
 	scripts
 	neofetch
 	qtile
@@ -141,11 +136,6 @@ elif [[ ! $# == "0" ]]; then
 				[ -d "$HOME/.config/compton" ] && rm -rf "$HOME/.config/compton"
 				stow -t "$HOME/.config" compton/
 				echo -e "${green}Compton linked successfully!${reset}"
-				;;
-			
-			"crontab")
-				crontab < crontab/crontab.txt
-				echo -e "${green}Crontab linked successfully!${reset}"
 				;;
 			
 			"scripts")

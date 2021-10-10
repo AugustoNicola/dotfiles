@@ -15,9 +15,9 @@
 
 ## Paquetes
 * [Alacritty](alacritty/alacritty)
+* [Anacron](anacron)
 * [Bash](bash)
 * [Compton](compton/compton)
-* [Crontab](crontab)
 * [Mis Scripts](scripts/Scripts)
 * [Neofetch](neofetch/neofetch)
 * [Plymouth](plymouth/circle)

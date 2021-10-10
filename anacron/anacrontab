@@ -11,7 +11,9 @@ SCRIPTS=/home/lambda/Scripts
 LOGS=/home/lambda/Logs
 
 # These replace cron's entries
-1       5       cron.daily      run-parts --report /etc/cron.daily
-7       10      cron.weekly     run-parts --report /etc/cron.weekly
-@monthly        15      cron.monthly    run-parts --report /etc/cron.monthly
-@monthly 1 log_trim /home/lambda/Scripts/log-cleaner
+1         5   cron.daily	 run-parts --report /etc/cron.daily
+7         7   cron.weekly    run-parts --report /etc/cron.weekly
+@monthly  10  cron.monthly   run-parts --report /etc/cron.monthly
+
+7         15  system-update  /home/lambda/Scripts/system-update -q
+@monthly  20  log-trim       /home/lambda/Scripts/log-cleaner

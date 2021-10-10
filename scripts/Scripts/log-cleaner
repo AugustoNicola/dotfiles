@@ -1,0 +1,11 @@
+#!/bin/zsh
+
+source /home/lambda/.config/zsh/zsh_variables
+content=""
+
+echo "$( date +'%F %T' ) $( basename $0 )" >> $LOGS/general.log 
+
+for log in $LOGS/*.log; do
+	content=$(tail $log -n 4)
+	echo "$content" > $log
+done

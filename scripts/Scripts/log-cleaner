@@ -6,6 +6,6 @@ content=""
 echo "$( date +'%F %T' ) $( basename $0 )" >> $LOGS/general.log 
 
 for log in $LOGS/*.log; do
-	content=$(tail $log -n 4)
+	content=$(tail $log -n 1000)
 	echo "$content" > $log
 done

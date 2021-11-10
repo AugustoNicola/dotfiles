@@ -22,6 +22,7 @@
 * [Rofi](rofi/rofi)
 * [Vis](vis/vis)
 * [VSCode](vscode)
+* [Wallpapers](wallpapers)
 * [Zathura](zathura)
 * [Zsh](zsh/zsh)
 

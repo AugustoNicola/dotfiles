@@ -15,5 +15,5 @@ LOGS=/home/lambda/Logs
 7         7   cron.weekly    run-parts --report /etc/cron.weekly
 @monthly  10  cron.monthly   run-parts --report /etc/cron.monthly
 
-7         15  system-update  /home/lambda/Scripts/system-update -q
-@monthly  20  log-trim       /home/lambda/Scripts/log-cleaner
+3         10  system-update  /home/lambda/Scripts/system-update -q
+@monthly  30  log-trim       /home/lambda/Scripts/log-cleaner

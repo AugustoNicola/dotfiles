@@ -6,3 +6,5 @@ export SCRIPTS="/home/lambda/Scripts"
 export LOGS="/home/lambda/Logs"
 
 export PATH="$PATH:$SPICETIFY_INSTALL:$SCRIPTS"
+
+export EXA_COLORS="hd=37;1;4:ur=32;1:uw=33;1:ux=31;1:ue=31;1:gr=32;1:gw=33;1:gx=31;1:tr=32;1:tw=33;1:tx=31;1:su=35;1:sf=35;1:uu=35:un=36:gu=35:gn=36"

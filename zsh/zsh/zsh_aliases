@@ -1,3 +1,5 @@
+source /home/lambda/.config/zsh/zsh_variables
+
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -10,8 +12,10 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-# ls alias: show full info as a list in a human-readable manner
-alias ll='ls -AlFh'
+#alias ll='ls -AlFh'
+
+# exa alias for listing directories
+alias ll="exa -laFhg --group-directories-first --no-filesize"
 
 # clear shortcuts
 alias cls='clear'
@@ -20,3 +24,6 @@ alias ncls='clear; neofetch'
 
 # matrix "toy command"
 alias matrix='cmatrix -B -C magenta'
+
+# open logs alias
+alias open_logs="code $LOGS"

@@ -72,7 +72,8 @@ spotify_cli = "bash /home/lambda/.config/qtile/spotify.sh"
 ide = "code -n"
 text_editor = "subl -n"
 discord = "discord"
-screenshot = "scrot '%F_%H:%M.png' -zp -e 'mv $f ~/Pictures/Screenshots/'"
+open_logs = "code /home/lambda/Logs/"
+screenshot = "scrot '%F_%H:%M:%S.png' -zp -e 'mv $f ~/Pictures/Screenshots/'"
 screenshot_and_edit = "scrot '%F_%H:%M.png' -zp -e 'mv $f ~/Pictures/Screenshots/ && gimp ~/Pictures/Screenshots/$f'"
 
 # ============================================================================
@@ -149,6 +150,8 @@ keys = [
         desc="Launch default text editor"),
     Key([mod], "d", lazy.spawn(discord),
         desc="Launch discord"),
+    Key([mod], "l", lazy.spawn(open_logs),
+        desc="Open Log Folder in VSCode"),
     Key([], "Print", lazy.spawn(screenshot),
         desc="Take a screenshot of the current view, mouse included"),
     Key([mod], "Print", lazy.spawn(screenshot_and_edit),

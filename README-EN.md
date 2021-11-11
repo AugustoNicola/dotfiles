@@ -14,6 +14,7 @@
 * [Anacron](anacron)
 * [Bash](bash)
 * [Compton](compton/compton)
+* [Dunst](dunst/dunst)
 * [My Scripts](scripts/Scripts)
 * [Neofetch](neofetch/neofetch)
 * [Plymouth](plymouth/circle)

@@ -42,6 +42,11 @@ if [[ $allFlag == "true" ]]; then
 	stow -t "$HOME/.config" compton/
 	echo -e "${green}Compton linked successfully!${reset}"
 	
+	# # DUNST
+	[ -d "$HOME/.config/dunst" ] && rm -rf "$HOME/.config/dunst"
+	stow -t "$HOME/.config" dunst/
+	echo -e "${green}Dunst linked successfully!${reset}"
+	
 	# # SCRIPTS
 	[ -d "$HOME/Scripts" ] && rm -rf "$HOME/Scripts"
 	stow -t "$HOME" scripts/ 
@@ -99,6 +104,7 @@ Possible targets:
 	alacritty
 	bash
 	compton
+	dunst
 	scripts
 	neofetch
 	qtile
@@ -136,6 +142,12 @@ elif [[ ! $# == "0" ]]; then
 				[ -d "$HOME/.config/compton" ] && rm -rf "$HOME/.config/compton"
 				stow -t "$HOME/.config" compton/
 				echo -e "${green}Compton linked successfully!${reset}"
+				;;
+			
+			"dunst")
+				[ -d "$HOME/.config/dunst" ] && rm -rf "$HOME/.config/dunst"
+				stow -t "$HOME/.config" dunst/
+				echo -e "${green}Dunst linked successfully!${reset}"
 				;;
 			
 			"scripts")

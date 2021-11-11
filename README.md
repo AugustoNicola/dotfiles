@@ -18,6 +18,7 @@
 * [Anacron](anacron)
 * [Bash](bash)
 * [Compton](compton/compton)
+* [Dunst](dunst/dunst)
 * [Fondos de Pantalla](wallpapers)
 * [Mis Scripts](scripts/Scripts)
 * [Neofetch](neofetch/neofetch)

@@ -40,6 +40,7 @@ while getopts ":qv" flag; do
 	esac
 done
 
+[[ $quietFlag == "true" ]] && notify-send "Actualizando paquetes" "Ejecutando el script de system-update..."
 
 # # Log usage
 echo "$( date +'%F %T' ) $( basename $0 )" >> $LOGS/general.log 
@@ -70,7 +71,9 @@ out_echo "${cyan}$( basename $0 )${normal}: Upgrading apt packages...${normal}"
 
 if [[ $pipestatus == "0" ]]; then
     out_echo "${green}$( basename $0 )${normal}: Packages installed correctly${normal}"
+	[[ $quietFlag == "true" ]] && notify-send "¡Mejora completa!" "Paquetes actualizados correctamente"
 else
     out_echo "${red}$( basename $0 )${normal}: Error upgrading packages!${normal}"
+	[[ $quietFlag == "true" ]] && notify-send "¡Error mejorando!" "Los paquetes no fueron actualizados" --urgency="critical"
     exit 3
 fi

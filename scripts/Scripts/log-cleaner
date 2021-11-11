@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+notify-send "Limpiando logs" --urgency="low"
+
 source /home/lambda/.config/zsh/zsh_variables
 content=""
 

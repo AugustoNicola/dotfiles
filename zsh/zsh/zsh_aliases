@@ -27,3 +27,11 @@ alias matrix='cmatrix -B -C magenta'
 
 # open logs alias
 alias open_logs="code $LOGS"
+
+history(){
+    if [[ -n $1 ]]; then
+        $(echo fc -l "-$1")
+    else
+        cat $HISTFILE
+    fi
+}

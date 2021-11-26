@@ -1,0 +1,31 @@
+#!/usr/bin/zsh
+
+source /home/lambda/.config/zsh/zsh_variables
+
+#* output coloring variables
+normal=$( tput sgr 0 );
+red=$( tput setaf 1 );
+green=$( tput setaf 2 );
+yellow=$( tput setaf 3 );
+blue=$( tput setaf 4 );
+magenta=$( tput setaf 5 );
+cyan=$( tput setaf 6 );
+white=$( tput setaf 7 );
+
+notify-send "Realizando Copia de Seguridad" "Cargando a repositorio online las notas..."
+
+# # Log usage
+echo "$( date +'%F %T' ) $( basename $0 )" >> $LOGS/general.log 
+
+echo "#? ========= $( date +'%F %T' ) =========" >> $LOGS/note-backup.log
+
+echo "#* --------- Creando commit ---------" >> $LOGS/note-backup.log
+
+cd /home/lambda/Documentos/Notas/
+git add .
+{ git status 2>&1; } >> $LOGS/note-backup.log
+git commit -m "$( date +'%F %T' )"
+
+echo "#* --------- Cargando a repositorio ---------" >> $LOGS/note-backup.log
+
+{ git push 2>&1; } >> $LOGS/note-backup.log

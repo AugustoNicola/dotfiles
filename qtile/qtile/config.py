@@ -63,18 +63,21 @@ mod = "mod4"
 alt = "mod1"
 
 #? programs used
-terminal = "alacritty"
-web_browser = "firefox"
-file_explorer = "xdg-open ."
-github = "github-desktop"
-music_player = "spotify"
-spotify_cli = "bash /home/lambda/.config/qtile/spotify.sh"
-ide = "code -n"
-text_editor = "subl -n"
-discord = "discord"
-open_logs = "code /home/lambda/Logs/"
-screenshot = "scrot '%F_%H:%M:%S.png' -zp -e 'mv $f ~/Pictures/Screenshots/'"
-screenshot_and_edit = "scrot '%F_%H:%M.png' -zp -e 'mv $f ~/Pictures/Screenshots/ && gimp ~/Pictures/Screenshots/$f'"
+spawns = {
+    "terminal": "alacritty",
+    "web_browser": "firefox",
+    "file_explorer": "xdg-open .",
+    "github": "github-desktop",
+    "music_player": "spotify",
+    "spotify_cli": "bash /home/lambda/.config/qtile/spotify.sh",
+    "ide": "code -n",
+    "text_editor": "subl -n",
+    "discord": "discord",
+    "open_logs": "code /home/lambda/Logs/",
+    "screenshot": "scrot '%F_%H:%M:%S.png' -q 100 -zp -e 'mv $f ~/Pictures/Screenshots/'",
+    "screenshot_and_edit": "scrot '%F_%H:%M.png' -zp -e 'mv $f ~/Pictures/Screenshots/ && gimp ~/Pictures/Screenshots/$f'",
+    "notes": "obsidian"
+}
 
 # ============================================================================
 # ===========================    KEYBINDINGS     =============================
@@ -134,35 +137,35 @@ keys = [
     Key([mod], "x", lazy.spawncmd(),
         desc="Run a command using a prompt widget"),
 
-    Key([mod], "t", lazy.spawn(terminal),
+    Key([mod], "t", lazy.spawn(spawns["terminal"]),
         desc="Launch default terminal"),
-    Key([mod], "e", lazy.spawn(web_browser),
+    Key([mod], "e", lazy.spawn(spawns["web_browser"]),
         desc="Launch default web browser"),
-    Key([mod], "f", lazy.spawn(file_explorer),
+    Key([mod], "f", lazy.spawn(spawns["file_explorer"]),
         desc="Launch default file explorer"),
-    Key([mod], "g", lazy.spawn(github),
-        desc="Launch GitHub"),
-    Key([mod], "m", lazy.spawn(music_player),
+    Key([mod], "m", lazy.spawn(spawns["music_player"]),
         desc="Launch default music player"),
-    Key([mod], "c", lazy.spawn(ide),
+    Key([mod], "n", lazy.spawn(spawns["notes"]),
+        desc="Launch note-taking app"),
+    Key([mod], "c", lazy.spawn(spawns["ide"]),
         desc="Launch default IDE"),
-    Key([mod], "s", lazy.spawn(text_editor),
+    Key([mod], "s", lazy.spawn(spawns["text_editor"]),
         desc="Launch default text editor"),
-    Key([mod], "d", lazy.spawn(discord),
+    Key([mod], "d", lazy.spawn(spawns["discord"]),
         desc="Launch discord"),
-    Key([mod], "l", lazy.spawn(open_logs),
+    Key([mod], "l", lazy.spawn(spawns["open_logs"]),
         desc="Open Log Folder in VSCode"),
-    Key([], "Print", lazy.spawn(screenshot),
+    Key([], "Print", lazy.spawn(spawns["screenshot"]),
         desc="Take a screenshot of the current view, mouse included"),
-    Key([mod], "Print", lazy.spawn(screenshot_and_edit),
+    Key([mod], "Print", lazy.spawn(spawns["screenshot_and_edit"]),
         desc="Take a screenshot of the current view, mouse included, and then open it in GIMP"),
 
     # ========== Spotify controls ==========
-    Key([], "XF86AudioPlay", lazy.spawn(spotify_cli + " play"),
+    Key([], "XF86AudioPlay", lazy.spawn(spawns["spotify_cli"] + " play"),
         desc="Play/pause spotify"),
-    Key([], "XF86AudioPrev", lazy.spawn(spotify_cli + " prev"),
+    Key([], "XF86AudioPrev", lazy.spawn(spawns["spotify_cli"] + " prev"),
         desc="Rewind spotify"),
-    Key([], "XF86AudioNext", lazy.spawn(spotify_cli + " next"),
+    Key([], "XF86AudioNext", lazy.spawn(spawns["spotify_cli"] + " next"),
         desc="Foward spotify"),
 
     # ========== Qtile interactions ==========

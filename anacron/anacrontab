@@ -15,6 +15,6 @@ LOGS=/home/lambda/Logs
 7         7   cron.weekly    run-parts --report /etc/cron.weekly
 @monthly  10  cron.monthly   run-parts --report /etc/cron.monthly
 
+1         5   note-backup    su -c '/home/lambda/Scripts/note-backup' lambda
 3         10  system-update  /home/lambda/Scripts/system-update -q
-5         15  note-backup    su -c '/home/lambda/Scripts/note-backup' lambda
 @monthly  30  log-trim       /home/lambda/Scripts/log-cleaner

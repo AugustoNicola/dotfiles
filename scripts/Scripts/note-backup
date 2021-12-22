@@ -29,3 +29,5 @@ git commit -m "$( date +'%F %T' )"
 echo "#* --------- Cargando a repositorio ---------" >> $LOGS/note-backup.log
 
 { git push 2>&1; } >> $LOGS/note-backup.log
+
+notify-send "Notas aseguradas" "¡Copia de seguridad en linea terminada!"

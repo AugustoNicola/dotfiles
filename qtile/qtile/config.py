@@ -53,7 +53,8 @@ palette_colors = {
         '#9130A5'
     ],
     "secondary": [
-        '#74D092'
+        '#74D092',
+        '#41975E'
     ],
     "background": "#252525"
 }
@@ -361,19 +362,31 @@ class CustomClock(base.InLoopPollText):
 # ============================================================================
 groupbox_defaults = dict(
     background = palette_colors["background"],
-
-    this_current_screen_border = '#9130A5',
+    
     highlight_method = 'block',
-
+    
     active = '#FFFFFF',
     inactive = '#9b9b9b',
     urgent_alert_method = 'block',
-
+    
     spacing = 5,
     padding = 12,
     margin_y = 2.5,
     rounded = False,
     use_mouse_wheel = False
+)
+
+primary_groupbox = dict(
+    this_current_screen_border = palette_colors["primary"][5],
+    this_screen_border = palette_colors["primary"][5],
+    other_current_screen_border = palette_colors["secondary"][1],
+    other_screen_border = palette_colors["secondary"][1]
+)
+secondary_groupbox = dict(
+    this_current_screen_border = palette_colors["secondary"][1],
+    this_screen_border = palette_colors["secondary"][1],
+    other_current_screen_border = palette_colors["primary"][5],
+    other_screen_border = palette_colors["primary"][5]
 )
 
 widget_defaults = dict(
@@ -401,30 +414,179 @@ screens = [
                     visible_groups = ["HOME"],
                     font = "FiraCode Nerd Font", #? using the font is vital for loading the icon
                     fontsize = 26,
+                    **primary_groupbox,
                     **groupbox_defaults
                 ),
                 widget.GroupBox(
                     visible_groups = ["WEB"],
                     font = "Font Awesome 5 Free",
                     fontsize = 20,
+                    **primary_groupbox,
                     **groupbox_defaults
                 ),
                 widget.GroupBox(
                     visible_groups = ["DEV", "TER"],
                     font = "Font Awesome 5 Free",
                     fontsize = 17,
+                    **primary_groupbox,
                     **groupbox_defaults
                 ),
                 widget.GroupBox(
                     visible_groups = ["DIS", "MUS"],
                     font = "Font Awesome 5 Free",
                     fontsize = 20,
+                    **primary_groupbox,
                     **groupbox_defaults
                 ),
                 widget.GroupBox(
                     visible_groups = ["CFG"],
                     font = "Font Awesome 5 Free",
                     fontsize = 18,
+                    **primary_groupbox,
+                    **groupbox_defaults
+                ),
+                # Command-running prompt
+                widget.Prompt(
+                    background = palette_colors["background"],
+                    prompt = 'Run: ',
+                    name = 'prompt'
+                ),
+                # Dynamic spacing
+                widget.Spacer(background = palette_colors["background"]),
+                # Window name
+                widget.WindowName(
+                    background = palette_colors["background"],
+                    width = bar.CALCULATED,
+                    max_chars = 100,
+                    foreground = palette_colors["secondary"][0]
+                ),
+                # Dynamic spacing
+                widget.Spacer(background = palette_colors["background"]),
+                # Powerline Arrow
+                widget.TextBox(font='Font Awesome 5 Free', text='', padding=0, fontsize=64,
+                    background = palette_colors["background"],
+                    foreground = palette_colors["primary"][3]
+                ),
+                # Systray
+                widget.Systray(
+                    background = palette_colors["primary"][3],
+                ),
+                # Spacing
+                widget.Sep(linewidth = 0, padding = 5, background=palette_colors["primary"][3]),
+                # Powerline Arrow
+                widget.TextBox(font='Font Awesome 5 Free', text='', padding=0, fontsize=64,
+                    background = palette_colors["primary"][3],
+                    foreground = palette_colors["primary"][2]
+                ),
+                # Internet Icon
+                TrayIcon(
+                    background_color = palette_colors["primary"][2],
+                    foreground_color = "#FFFFFF",
+                    text='',
+                    font="Font Awesome 5 Free",
+                    fontsize = 14.5,
+                    mouse_callbacks = {'Button1': open_wifi_settings}
+                ),
+                # Spacing between Icons
+                widget.Sep(linewidth = 0, padding = 5, background = palette_colors["primary"][2]),
+                # Audio Icon
+                TrayIcon(
+                    background_color = palette_colors["primary"][2],
+                    foreground_color = "#FFFFFF",
+                    text='',
+                    font="Font Awesome 5 Free",
+                    fontsize = 14.5,
+                    mouse_callbacks = {'Button1': open_audio_settings}
+                ),
+                # Spacing
+                widget.Sep(linewidth = 0, padding = 5, background=palette_colors["primary"][2]),
+                # Powerline Arrow
+                widget.TextBox(font='Font Awesome 5 Free', text='', padding=0, fontsize=64,
+                    background=palette_colors["primary"][2],
+                    foreground=palette_colors["primary"][1]
+                ),
+                # Calendar Icon 
+                widget.TextBox(
+                    font = 'Font Awesome 5 Free',
+                    text = '',
+                    fontsize = 14,
+                    background = palette_colors["primary"][1]
+                ),
+                # Spacing
+                widget.Sep(linewidth = 0, padding = 3, background=palette_colors["primary"][1]),
+                # Date Widget
+                CustomCalendar(background_color=palette_colors["primary"][1], foreground_color="#FFFFFF", mouse_callbacks = {'Button1': open_calendar}),
+                #widget.Clock(
+                #    format=f'%Y/%m/%d {weekDay}', #! embrace ISO 8601
+                #    background=palette_colors["primary"][1],
+                #),
+                # Spacing
+                widget.Sep(linewidth = 0, padding = 5, background=palette_colors["primary"][1]),
+                # Powerline Arrow
+                widget.TextBox(font='Font Awesome 5 Free', text='', padding=0, fontsize=64,
+                    background=palette_colors["primary"][1],
+                    foreground=palette_colors["primary"][0]
+                ),
+                # Clock Icon
+                widget.TextBox(
+                    font = 'Font Awesome 5 Free',
+                    text = '',
+                    fontsize = 14,
+                    background = palette_colors["primary"][0]
+                ),
+                # Spacing
+                widget.Sep(linewidth = 0, padding = 3, background=palette_colors["primary"][0]),
+                # Time Widget
+                CustomClock(background_color=palette_colors["primary"][0], foreground_color="#FFFFFF", mouse_callbacks = {'Button1': open_clock}),
+                #widget.Clock(
+                #    format='%H:%M',
+                #    background=palette_colors["primary"][0],
+                #),
+                # Right border spacing
+                widget.Sep(linewidth = 0, padding = 10, background = palette_colors["primary"][0])
+            ],
+            32,
+        ),
+        wallpaper=wallpaper,
+        wallpaper_mode="fill"
+    ),
+    Screen(
+        bottom=bar.Bar(
+            [
+                # Group Bar(s)
+                widget.GroupBox(
+                    visible_groups = ["HOME"],
+                    font = "FiraCode Nerd Font", #? using the font is vital for loading the icon
+                    fontsize = 26,
+                    **secondary_groupbox,
+                    **groupbox_defaults
+                ),
+                widget.GroupBox(
+                    visible_groups = ["WEB"],
+                    font = "Font Awesome 5 Free",
+                    fontsize = 20,
+                    **secondary_groupbox,
+                    **groupbox_defaults
+                ),
+                widget.GroupBox(
+                    visible_groups = ["DEV", "TER"],
+                    font = "Font Awesome 5 Free",
+                    fontsize = 17,
+                    **secondary_groupbox,
+                    **groupbox_defaults
+                ),
+                widget.GroupBox(
+                    visible_groups = ["DIS", "MUS"],
+                    font = "Font Awesome 5 Free",
+                    fontsize = 20,
+                    **secondary_groupbox,
+                    **groupbox_defaults
+                ),
+                widget.GroupBox(
+                    visible_groups = ["CFG"],
+                    font = "Font Awesome 5 Free",
+                    fontsize = 18,
+                    **secondary_groupbox,
                     **groupbox_defaults
                 ),
                 # Command-running prompt

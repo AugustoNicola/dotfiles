@@ -136,7 +136,7 @@
     # Show age of message if message is older than show_age_threshold
     # seconds.
     # Set to -1 to disable.
-    show_age_threshold = 60
+    show_age_threshold = 10
 
     # Split notifications into multiple lines if they don't fit into
     # geometry.
@@ -163,11 +163,15 @@
     # Align icons left/right/off
     icon_position = left
 
+    min_icon_size = 64
+    
     # Scale larger icons down to this size, set to 0 to disable
     max_icon_size = 64
 
     # Paths to default icons.
-    icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
+    icon_path = /usr/share/icons/Yaru/32x32/status/:/usr/share/icons/Yaru/32x32/devices/
+    #icon_path = /home/lambda/\.local/share/icons/Yaru-Purple/16x16/status/:/home/lambda/\.local/share/icons/Yaru-Purple/16x16/devices/
+    # icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
 
     ### History ###
 
@@ -278,21 +282,21 @@
     # Otherwise the "#" and following would be interpreted as a comment.
     background = "#494949"
     foreground = "#ffffff"
-    timeout = 10
+    timeout = 0
     # Icon for notifications with low urgency, uncomment to enable
     #icon = /path/to/icon
 
 [urgency_normal]
     background = "#252525"
     foreground = "#ffffff"
-    timeout = 10
+    timeout = 0
     # Icon for notifications with normal urgency, uncomment to enable
-    #icon = /path/to/icon
+    #icon = /usr/share/icons/Adwaita/32x32/legacy/appointment-soon.png
 
 [urgency_critical]
     background = "#602020"
     foreground = "#ffffff"
-    timeout = 15
+    timeout = 0
     # Icon for notifications with critical urgency, uncomment to enable
     #icon = /path/to/icon
 

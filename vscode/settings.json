@@ -21,8 +21,6 @@
 	"debug.onTaskErrors": "abort",
 	
 	"editor.multiCursorModifier": "ctrlCmd",
-	
-	"window.zoomLevel": 1,
 	"window.menuBarVisibility": "toggle",
 	
 	"terminal.integrated.defaultProfile.windows": "PowerShell",
@@ -206,5 +204,8 @@
 	"prettier.requireConfig": true,
 	"prettier.tabWidth": 4,
 	"prettier.trailingComma": "none",
-	"prettier.useTabs": true
+	"prettier.useTabs": true,
+	"window.zoomLevel": 1,
+	"bracket-pair-colorizer-2.depreciation-notice": false,
+	"git.ignoreRebaseWarning": true
 }
